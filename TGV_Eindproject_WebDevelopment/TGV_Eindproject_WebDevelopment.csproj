@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TGV_Eindproject_WebDevelopment.Domain\TGV_Eindproject_WebDevelopment.Domain.csproj" />
+    <ProjectReference Include="..\TGV_Eindproject_WebDevelopment.Service\TGV_Eindproject_WebDevelopment.Service.csproj" />
+  </ItemGroup>
+
 </Project>
