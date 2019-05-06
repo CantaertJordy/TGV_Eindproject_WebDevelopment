@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-TGV_Eindproject_WebDevelopment.UI-925313A6-BA72-4F05-B3CA-270AEAF9AB80</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TGV_Eindproject_WebDevelopment.Domain\TGV_Eindproject_WebDevelopment.Domain.csproj" />
+    <ProjectReference Include="..\TGV_Eindproject_WebDevelopment.Service\TGV_Eindproject_WebDevelopment.Service.csproj" />
+  </ItemGroup>
+
+</Project>

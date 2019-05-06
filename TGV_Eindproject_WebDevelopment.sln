@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TGV_Eindproject_WebDevelopment", "TGV_Eindproject_WebDevelopment\TGV_Eindproject_WebDevelopment.csproj", "{B3984947-8E30-432C-B33E-9921D211BF8E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TGV_Eindproject_WebDevelopment.Domain", "TGV_Eindproject_WebDevelopment.Domain\TGV_Eindproject_WebDevelopment.Domain.csproj", "{8C388068-6FFD-4545-AEE4-843E9E99D560}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TGV_Eindproject_WebDevelopment.Service", "TGV_Eindproject_WebDevelopment.Service\TGV_Eindproject_WebDevelopment.Service.csproj", "{F5AF6678-B5D3-4303-8BFD-874EDD7DF089}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TGV_Eindproject_WebDevelopment.Repository", "TGV_Eindproject_WebDevelopment.Repository\TGV_Eindproject_WebDevelopment.Repository.csproj", "{4DEF4E87-3DF9-4CCB-9299-6F701CC6FFC0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TGV_Eindproject_WebDevelopment.UI", "TGV_Eindproject_WebDevelopment.UI\TGV_Eindproject_WebDevelopment.UI.csproj", "{2B6906DB-E948-4F57-B0DF-4779E6E954A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B3984947-8E30-432C-B33E-9921D211BF8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3984947-8E30-432C-B33E-9921D211BF8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B3984947-8E30-432C-B33E-9921D211BF8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B3984947-8E30-432C-B33E-9921D211BF8E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8C388068-6FFD-4545-AEE4-843E9E99D560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8C388068-6FFD-4545-AEE4-843E9E99D560}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C388068-6FFD-4545-AEE4-843E9E99D560}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{4DEF4E87-3DF9-4CCB-9299-6F701CC6FFC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DEF4E87-3DF9-4CCB-9299-6F701CC6FFC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DEF4E87-3DF9-4CCB-9299-6F701CC6FFC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B6906DB-E948-4F57-B0DF-4779E6E954A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B6906DB-E948-4F57-B0DF-4779E6E954A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B6906DB-E948-4F57-B0DF-4779E6E954A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B6906DB-E948-4F57-B0DF-4779E6E954A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
