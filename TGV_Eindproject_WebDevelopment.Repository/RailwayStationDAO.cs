@@ -40,25 +40,5 @@ namespace TGV_Eindproject_WebDevelopment.Repository
 
         #endregion
 
-        #region Update-Methods
-
-        public void Update(RailwayStations station)
-        {
-            _dbContext.Entry(station).State = EntityState.Modified;
-            _dbContext.SaveChanges();
-        }
-
-        #endregion
-
-        #region Insert-Methods
-
-        public void Create(RailwayStations station)
-        {
-            _dbContext.Entry(station).State = EntityState.Added;
-            _dbContext.SaveChanges();
-        }
-
-        #endregion
-
     }
 }
