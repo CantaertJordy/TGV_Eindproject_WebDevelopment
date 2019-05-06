@@ -38,6 +38,11 @@ namespace TGV_Eindproject_WebDevelopment.Service
             return railwayStationDAO.Get(id);
         }
 
+        public RailwayStations Get(string city)
+        {
+            return railwayStationDAO.Get(city);
+        }
+
         #endregion
 
     }
