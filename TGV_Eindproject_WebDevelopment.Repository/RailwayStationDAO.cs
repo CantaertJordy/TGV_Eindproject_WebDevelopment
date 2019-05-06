@@ -38,6 +38,11 @@ namespace TGV_Eindproject_WebDevelopment.Repository
             return _dbContext.RailwayStations.Where(station => station.Id == id).First();
         }
 
+        public RailwayStations Get(string city)
+        {
+            return _dbContext.RailwayStations.Where(station => station.City.Equals(city)).First();
+        }
+
         #endregion
 
     }
