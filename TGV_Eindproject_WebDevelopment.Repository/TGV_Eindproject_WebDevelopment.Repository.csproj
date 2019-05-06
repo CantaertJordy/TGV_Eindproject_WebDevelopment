@@ -124,6 +124,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LineDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RailwayStationDAO.cs" />
   </ItemGroup>
