@@ -35,7 +35,7 @@ namespace TGV_Eindproject_WebDevelopment.Service
 
         public RailwayStations Get(int id)
         {
-            return railwayStationDAO.Get();
+            return railwayStationDAO.Get(id);
         }
 
         #endregion
