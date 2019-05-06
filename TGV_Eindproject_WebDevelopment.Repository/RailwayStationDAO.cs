@@ -35,7 +35,7 @@ namespace TGV_Eindproject_WebDevelopment.Repository
 
         public RailwayStations Get(int id)
         {
-            return _dbContext.RailwayStations.Where(station => station.Id == id).ToList().FirstOrDefault();
+            return _dbContext.RailwayStations.Where(station => station.Id == id).First();
         }
 
         #endregion
