@@ -40,7 +40,7 @@ namespace TGV_Eindproject_WebDevelopment.Service
         {
             if (departureId == destinationId)
             {
-                return null; // foutmelding
+                throw new ArgumentException("The departure and destination cannot be the same.");
             }
 
             RailwayStations london = railwayStationService.Get("Londen");
