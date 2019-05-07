@@ -33,7 +33,7 @@ namespace TGV_Eindproject_WebDevelopment.Repository
             return _dbContext.Tgvs.Include(tgv => tgv.LineNavigation).ToList();
         }
 
-        public IEnumerable<Tgvs> TGVsOnLine(int lineId)
+        public IEnumerable<Tgvs> Get(int lineId)
         {
             return _dbContext.Tgvs.Where(tgv => tgv.Line == lineId).ToList();
         }

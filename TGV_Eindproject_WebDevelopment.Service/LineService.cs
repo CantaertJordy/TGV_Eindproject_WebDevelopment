@@ -55,30 +55,30 @@ namespace TGV_Eindproject_WebDevelopment.Service
 
             if (departureId == london.Id)
             {
-                route.Add(lineDAO.LineWithDepartureAndDestination(departureId, brussels.Id));
+                route.Add(lineDAO.Get(departureId, brussels.Id));
                 departureId = brussels.Id;
             }
             else if (departureId == moscow.Id)
             {
-                route.Add(lineDAO.LineWithDepartureAndDestination(departureId, berlin.Id));
+                route.Add(lineDAO.Get(departureId, berlin.Id));
                 departureId = brussels.Id;
             }
 
             if (destinationId == moscow.Id)
             {
-                route.Add(lineDAO.LineWithDepartureAndDestination(departureId, berlin.Id));
-                route.Add(lineDAO.LineWithDepartureAndDestination(berlin.Id, destinationId));
+                route.Add(lineDAO.Get(departureId, berlin.Id));
+                route.Add(lineDAO.Get(berlin.Id, destinationId));
             }
             else if ((departureId == amsterdam.Id && destinationId == rome.Id) || (departureId == amsterdam.Id && destinationId == paris.Id)
                 || (departureId == rome.Id && destinationId == amsterdam.Id) || (departureId == paris.Id && destinationId == amsterdam.Id)
                 || destinationId == london.Id) 
             {
-                route.Add(lineDAO.LineWithDepartureAndDestination(departureId, brussels.Id));
-                route.Add(lineDAO.LineWithDepartureAndDestination(brussels.Id, destinationId));
+                route.Add(lineDAO.Get(departureId, brussels.Id));
+                route.Add(lineDAO.Get(brussels.Id, destinationId));
             }
             else
             {
-                route.Add(lineDAO.LineWithDepartureAndDestination(departureId, destinationId));
+                route.Add(lineDAO.Get(departureId, destinationId));
             }
 
             return route;
@@ -86,12 +86,12 @@ namespace TGV_Eindproject_WebDevelopment.Service
 
         public IEnumerable<Lines> GetLinesWithDeparture(int departureId)
         {
-            return lineDAO.LinesWithDeparture(departureId);
+            return lineDAO.GetWithDeparture(departureId);
         }
 
         public IEnumerable<Lines> GetLinesWithDestination(int destinationId)
         {
-            return lineDAO.LinesWithDestination(destinationId);
+            return lineDAO.GetWithDestination(destinationId);
         }
 
         #endregion
