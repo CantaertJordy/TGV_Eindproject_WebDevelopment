@@ -77,6 +77,13 @@ namespace TGV_Eindproject_WebDevelopment.Service
             return tgvDAO.GetWithLine(lineId);
         }
 
+        public int GetAmountOfSeats(int id, byte IsBusiness)
+        {
+            if (IsBusiness == 0)
+                return Get(id).AvailableEconomicSeats;
+            return Get(id).AvailableBusinessSeats;
+        }
+
         #endregion
 
         #region Helper-Methods
