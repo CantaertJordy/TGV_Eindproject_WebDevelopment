@@ -8,6 +8,7 @@ namespace TGV_Eindproject_WebDevelopment.Domain.Entities
         public int Id { get; set; }
         public int UserId { get; set; }
         public int Tgvid { get; set; }
+        public string Name { get; set; }
         public DateTime DateOfDeparture { get; set; }
         public byte IsBusiness { get; set; }
         public string SeatNumber { get; set; }
