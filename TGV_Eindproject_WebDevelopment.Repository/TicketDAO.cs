@@ -28,22 +28,22 @@ namespace TGV_Eindproject_WebDevelopment.Repository
 
         #region Select-Methods
 
-        private IEnumerable<Tickets> All()
+        public IEnumerable<Tickets> All()
         {
             return _dbContext.Tickets.ToList();
         }
 
-        private IEnumerable<Tickets> AllFromUser(int userId)
+        public IEnumerable<Tickets> AllFromUser(int userId)
         {
             return _dbContext.Tickets.Where(t => t.UserId == userId).ToList();
         }
 
-        private Tickets Get(int id)
+        public Tickets Get(int id)
         {
             return _dbContext.Tickets.Where(t => t.Id == id).First();
         }
 
-        private IEnumerable<Tickets> AllForTGV(int tgvId, DateTime dateOfDeparture)
+        public IEnumerable<Tickets> AllForTGV(int tgvId, DateTime dateOfDeparture)
         {
             return _dbContext.Tickets.Where(t => t.Tgvid == tgvId && t.DateOfDeparture.Date.Equals(dateOfDeparture.Date)).ToList();
         }
