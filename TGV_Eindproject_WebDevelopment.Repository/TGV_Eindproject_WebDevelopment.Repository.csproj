@@ -131,7 +131,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RailwayStationDAO.cs" />
     <Compile Include="TGVDAO.cs" />
-    <Compile Include="UserDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TGV_Eindproject_WebDevelopment.Domain\TGV_Eindproject_WebDevelopment.Domain.csproj">

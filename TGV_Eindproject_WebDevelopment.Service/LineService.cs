@@ -71,7 +71,7 @@ namespace TGV_Eindproject_WebDevelopment.Service
             }
             else if ((departureId == amsterdam.Id && destinationId == rome.Id) || (departureId == amsterdam.Id && destinationId == paris.Id)
                 || (departureId == rome.Id && destinationId == amsterdam.Id) || (departureId == paris.Id && destinationId == amsterdam.Id)
-                || destinationId == london.Id) 
+                || destinationId == london.Id)
             {
                 route.Add(lineDAO.Get(departureId, brussels.Id));
                 route.Add(lineDAO.Get(brussels.Id, destinationId));

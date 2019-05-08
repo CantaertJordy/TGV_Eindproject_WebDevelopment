@@ -35,15 +35,27 @@ namespace TGV_Eindproject_WebDevelopment.Service
 
         #region Get-Methods
 
+        public Tgvs Get(int id)
+        {
+            return tgvDAO.Get(id);
+        }
+
         public IList<Tgvs> GetJourney(int departureId, int destinationId, TimeSpan timeOfDeparture)
         {
             IList<Lines> route = lineService.GetRoute(departureId, destinationId);
 
             IList<Tgvs> journey = new List<Tgvs>();
 
+            TimeSpan fullDay = new TimeSpan(24, 0, 0);
+
             foreach (Lines l in route)
             {
-                // verdere implementatie voor GetJourney
+                Tgvs tgv = GetJourney(l, timeOfDeparture);
+                journey.Add(tgv);
+
+                timeOfDeparture.Add(tgv.TimeOfDeparture);
+                if (timeOfDeparture.CompareTo(fullDay) >= 0)
+                    timeOfDeparture.Subtract(fullDay);
             }
 
             return journey;
@@ -63,6 +75,13 @@ namespace TGV_Eindproject_WebDevelopment.Service
         public IEnumerable<Tgvs> GetWithLine(int lineId)
         {
             return tgvDAO.GetWithLine(lineId);
+        }
+
+        public int GetAmountOfSeats(int id, byte IsBusiness)
+        {
+            if (IsBusiness == 0)
+                return Get(id).AvailableEconomicSeats;
+            return Get(id).AvailableBusinessSeats;
         }
 
         #endregion

@@ -306,6 +306,12 @@ namespace TGV_Eindproject_WebDevelopment.Domain.Entities
                     .HasColumnName("dateOfDeparture")
                     .HasColumnType("date");
 
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("name")
+                    .HasMaxLength(50)
+                    .IsUnicode(false); ;
+
                 entity.Property(e => e.IsBusiness).HasColumnName("isBusiness");
 
                 entity.Property(e => e.IsCancelled).HasColumnName("isCancelled");
