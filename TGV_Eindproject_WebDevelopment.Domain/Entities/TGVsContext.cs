@@ -235,6 +235,8 @@ namespace TGV_Eindproject_WebDevelopment.Domain.Entities
 
                 entity.Property(e => e.Destination).HasColumnName("destination");
 
+                entity.Property(e => e.Duration).HasColumnName("duration");
+
                 entity.HasOne(d => d.DepartureNavigation)
                     .WithMany(p => p.LinesDepartureNavigation)
                     .HasForeignKey(d => d.Departure)

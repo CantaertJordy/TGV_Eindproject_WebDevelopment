@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TGV_Eindproject_WebDevelopment.Domain.Entities;
 using TGV_Eindproject_WebDevelopment.UI.Models;
 
 namespace TGV_Eindproject_WebDevelopment.UI.Controllers
