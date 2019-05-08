@@ -35,6 +35,11 @@ namespace TGV_Eindproject_WebDevelopment.Service
 
         #region Get-Methods
 
+        public Tgvs Get(int id)
+        {
+            return tgvDAO.Get(id);
+        }
+
         public IList<Tgvs> GetJourney(int departureId, int destinationId, TimeSpan timeOfDeparture)
         {
             IList<Lines> route = lineService.GetRoute(departureId, destinationId);
