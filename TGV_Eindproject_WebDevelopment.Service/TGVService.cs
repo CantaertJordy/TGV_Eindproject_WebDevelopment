@@ -41,9 +41,16 @@ namespace TGV_Eindproject_WebDevelopment.Service
 
             IList<Tgvs> journey = new List<Tgvs>();
 
+            TimeSpan fullDay = new TimeSpan(24, 0, 0);
+
             foreach (Lines l in route)
             {
-                // verdere implementatie voor GetJourney
+                Tgvs tgv = GetJourney(l, timeOfDeparture);
+                journey.Add(tgv);
+
+                timeOfDeparture.Add(tgv.TimeOfDeparture);
+                if (timeOfDeparture.CompareTo(fullDay) >= 0)
+                    timeOfDeparture.Subtract(fullDay);
             }
 
             return journey;
