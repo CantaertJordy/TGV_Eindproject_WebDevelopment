@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HolidayPeriodService.cs" />
+    <Compile Include="HotelReservationService.cs" />
+    <Compile Include="HotelsService.cs" />
     <Compile Include="LineService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RailwayStationService.cs" />
