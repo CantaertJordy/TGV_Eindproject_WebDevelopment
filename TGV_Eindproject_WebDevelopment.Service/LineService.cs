@@ -53,12 +53,12 @@ namespace TGV_Eindproject_WebDevelopment.Service
 
             IList<Lines> route = new List<Lines>();
 
-            if (departureId == london.Id)
+            if (departureId == london.Id && destinationId != brussels.Id)
             {
                 route.Add(lineDAO.Get(departureId, brussels.Id));
                 departureId = brussels.Id;
             }
-            else if (departureId == moscow.Id)
+            else if (departureId == moscow.Id && destinationId != berlin.Id)
             {
                 route.Add(lineDAO.Get(departureId, berlin.Id));
                 departureId = brussels.Id;
