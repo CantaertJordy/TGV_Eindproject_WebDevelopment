@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,6 +42,15 @@ namespace TGV_Eindproject_WebDevelopment.Repository
         #region Update-Methods
 
 
+
+        #endregion
+
+        #region Create-Methods
+        public void Create(Users entity)
+        {
+            _dbContext.Entry(entity).State = EntityState.Added;
+            _dbContext.SaveChanges();
+        }
 
         #endregion
     }
