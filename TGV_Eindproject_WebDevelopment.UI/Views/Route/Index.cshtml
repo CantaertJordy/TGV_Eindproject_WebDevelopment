@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Your journey</h2>
+
+<div class="row">
+    <form asp-action="CalculateRoute"
+            data-ajax="true"
+            data-ajax-method="POST"
+            data-ajax-mode="replace"
+            data-ajax-update="#content"
+            data-ajax-loading="#loading"
+            data-ajax-success="Success"
+            data-ajax-failure="Failure">
+
+    </form>
+</div>
+
