@@ -3,6 +3,10 @@
     ViewData["Title"] = "Index";
 }
 
+@section Styles {
+    <link href="~/lib/jqueryui/jquery-ui.min.css" rel="stylesheet" />
+}
+
 <h2>Your journey</h2>
 
 <div class="row">
@@ -26,7 +30,18 @@
                 <option>Please select a station...</option>
             </select>
         </div>
-
+        <div class="col-md-3">
+            <label for="dateOfDeparture" class="control-label">Date of departure:</label>
+            <input id="dateOfDeparture" class="form-control" name="dateOfDeparture" type="date" min="2019-05-14"/>
+        </div>
+        <div class="col-md-3">
+            <input type="submit" value="Calculate route" />
+        </div>
     </form>
 </div>
 
+@section Scripts {
+    <script src="~/lib/jqueryui/jquery-ui.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/js/route.js"></script>
+}
