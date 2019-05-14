@@ -49,6 +49,7 @@
     <Compile Include="RailwayStationService.cs" />
     <Compile Include="TGVService.cs" />
     <Compile Include="TicketService.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TGV_Eindproject_WebDevelopment.Domain\TGV_Eindproject_WebDevelopment.Domain.csproj">

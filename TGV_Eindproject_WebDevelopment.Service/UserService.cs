@@ -29,5 +29,10 @@ namespace TGV_Eindproject_WebDevelopment.Service
         {
             return userDAO.Get(id);
         }
+
+        public void Create(Users entity)
+        {
+            userDAO.Create(entity);
+        }
     }
 }
