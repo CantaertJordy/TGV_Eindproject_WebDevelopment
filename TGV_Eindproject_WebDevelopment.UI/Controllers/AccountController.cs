@@ -12,7 +12,7 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
 {
     public class AccountController : Controller
     {
-        private UserService userService;
+        private readonly UserService userService;
 
         public AccountController()
         {
@@ -50,7 +50,6 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
                 ModelState.AddModelError("", "Something went wrong, please try again.");
             }
 
-            // TOEVOEGEN SESSION TOKEN
             return View(); ////////////////////////////////////////
         }
     }
