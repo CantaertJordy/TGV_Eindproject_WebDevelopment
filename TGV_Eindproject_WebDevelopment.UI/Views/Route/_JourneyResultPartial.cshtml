@@ -12,7 +12,9 @@
         @foreach (RouteVM r in route)
         {
             <div class="row">
-                <p>Time of departure: @r.TimeOfDeparture</p>
+                <div class="col-md-4">
+                    <p>Time of departure: @r.TimeOfDeparture</p>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -24,7 +26,9 @@
                 </div>
             </div>
             <div class="row">
-                <p>Time of arrival: @r.TimeOfArrival</p>
+                <div class="col-md-4">
+                    <p>Time of arrival: @r.TimeOfArrival</p>
+                </div>
             </div>
             <hr />
 

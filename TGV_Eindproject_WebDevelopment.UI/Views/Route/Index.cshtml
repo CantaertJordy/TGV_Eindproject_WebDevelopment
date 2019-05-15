@@ -37,11 +37,14 @@
             <input id="dateOfDeparture" class="form-control" name="dateOfDeparture" autocomplete="off" />
         </div>
         <div class="col-md-2">
-            <input class="form-control horizontal-submit horizontal-form" type="submit" value="Calculate Route" />
+            <input class="form-control horizontal-submit horizontal-form" type="submit" id="calculate" value="Calculate Route" />
         </div>
         <div class="col-md-1">
             <img id="calculateLoading" src="~/images/loading.gif" class="horizontal-form" alt="loading" />
         </div>
+    </div>
+    <div class="row">
+        <p id="errorMessage" class="error col-md-6"></p>
     </div>
 </form>
 
