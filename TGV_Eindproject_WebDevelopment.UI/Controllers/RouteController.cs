@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,7 +20,6 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             railwayStationService = new RailwayStationService();
         }
 
-        [HttpGet]
         public IActionResult Index()
         {
             ViewBag.stations = new SelectList(railwayStationService.All(), "Id", "City");
@@ -27,8 +27,14 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult CalculateRoute()
+        public ActionResult Index(int? departureId, int? destinationId, DateTime? dateOfDeparture)
         {
+            if (departureId == null || destinationId == null || dateOfDeparture == null || destinationId == departureId)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return PartialView("_FaultyInputPartial");
+            }
+
             return View();
         }
     }
