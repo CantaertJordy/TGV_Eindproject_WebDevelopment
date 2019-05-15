@@ -1,11 +1,9 @@
 ﻿$(() => {
-    let dateInput = $("#dateOfDeparture");
-
-    let today = new Date();
-    console.log(today);
-    let finalDate = today.getDate() + 14;
-    console.log(finalDate);
-
-    dateInput.attr("min", today);
-    dateInput.attr("max", finalDate);
+    $("#dateOfDeparture").datepicker({
+        numberOfMonths: 1,
+        showButtonPanel: true,
+        dateFormat: "dd-mm-yy",
+        minDate: "+0d",
+        maxDate: "+2w"
+    })
 })
