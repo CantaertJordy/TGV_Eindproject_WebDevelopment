@@ -53,3 +53,9 @@ p.error {
 .route {
     border: 1px solid lightgray;
 }
+
+#calculateLoading {
+    display: none;
+    width: 30px;
+    margin-top: 28px;
+}

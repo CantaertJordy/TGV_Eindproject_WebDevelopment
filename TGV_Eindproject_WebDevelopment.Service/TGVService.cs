@@ -68,6 +68,7 @@ namespace TGV_Eindproject_WebDevelopment.Service
             foreach (Lines l in route)
             {
                 Tgvs tgv = GetJourney(l, timeOfDeparture);
+                tgv.LineNavigation = l;
                 journey.Add(tgv);
 
                 timeOfDeparture.Add(tgv.TimeOfDeparture);

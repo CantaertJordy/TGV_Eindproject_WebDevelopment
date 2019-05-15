@@ -35,17 +35,17 @@ namespace TGV_Eindproject_WebDevelopment.Repository
 
         public Lines Get(int departureId, int destinationId)
         {
-            return _dbContext.Lines.Where(line => line.Departure == departureId && line.Destination == destinationId).FirstOrDefault();
+            return _dbContext.Lines.Where(line => line.Departure == departureId && line.Destination == destinationId).Include(line => line.DepartureNavigation).Include(line => line.DestinationNavigation).FirstOrDefault();
         }
 
         public IEnumerable<Lines> GetWithDeparture(int departureId)
         {
-            return _dbContext.Lines.Where(line => line.Departure == departureId).ToList();
+            return _dbContext.Lines.Where(line => line.Departure == departureId).Include(line => line.DepartureNavigation).Include(line => line.DestinationNavigation).ToList();
         }
 
         public IEnumerable<Lines> GetWithDestination(int destinationId)
         {
-            return _dbContext.Lines.Where(line => line.Destination == destinationId).ToList();
+            return _dbContext.Lines.Where(line => line.Destination == destinationId).Include(line => line.DepartureNavigation).Include(line => line.DestinationNavigation).ToList();
         }
 
         #endregion

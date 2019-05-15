@@ -1,8 +1,51 @@
-﻿@model IList<IList<Tgvs>>
+﻿@model IList<IList<RouteVM>>
 
-@foreach (IList<Tgvs> route in Model)
+@foreach (IList<RouteVM> route in Model)
 {
+<form>
     <div class="route">
+        @{
+            double businessSum = 0;
+            double economicSum = 0;
+        }
 
+        @foreach (RouteVM r in route)
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Time of departure: @r.TimeOfDeparture</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <p>@r.StartStation &rarr; @r.EndStation</p>
+                </div>
+                <div class="col-md-4">
+                    <p>Business: € @r.PriceBusiness (still @r.AvailableSeatsBusiness available)</p>
+                    <p>Economic: € @r.PriceEconomic (still @r.AvailableSeatsEconomic available)</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Time of arrival: @r.TimeOfArrival</p>
+                </div>
+            </div>
+            <hr />
+
+            businessSum += r.PriceBusiness;
+            economicSum += r.PriceEconomic;
+            
+        }
+        <div class="row">
+            <div class="col-md-8">
+                <p>Total price business: € @businessSum</p>
+                <p>Total price economic: € @economicSum</p>
+            </div>
+            <div class="col-md-4">
+                <button class="form-control horizontal-submit">Buy business</button>
+                <button class="form-control horizontal-submit">Buy economic</button>
+            </div>
+        </div>
     </div>
+</form>
 }
