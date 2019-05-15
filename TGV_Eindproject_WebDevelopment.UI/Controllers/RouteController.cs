@@ -43,14 +43,32 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             {
                 IList<RouteVM> route = new List<RouteVM>();
 
+                DateTime departureDate = (DateTime)dateOfDeparture;
+                DateTime lastArrival = departureDate;
+                DateTime temp;
+
                 foreach(Tgvs tgv in calculatedRoute)
                 {
+                    temp = departureDate.Add(tgv.TimeOfDeparture);
+
+                    while (temp.CompareTo(lastArrival) <= 0)
+                        temp = temp.AddDays(1);
+
                     RouteVM r = new RouteVM()
                     {
                         StartStation = tgv.LineNavigation.DepartureNavigation.City,
                         EndStation = tgv.LineNavigation.DestinationNavigation.City,
+                        TimeOfDeparture = temp,
+                        AvailableSeatsBusiness = tgv.AvailableBusinessSeats,
+                        AvailableSeatsEconomic = tgv.AvailableEconomicSeats,
+                        PriceBusiness = tgv.BasePriceBusiness,
+                        PriceEconomic = tgv.BasePriceEconomic,
                         Tgv = tgv
                     };
+
+                    lastArrival = temp.Add(tgv.LineNavigation.Duration);
+
+                    r.TimeOfArrival = lastArrival;
 
                     route.Add(r);
                 }
