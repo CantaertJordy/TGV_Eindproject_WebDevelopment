@@ -39,3 +39,9 @@ body {
 #startScreenImg {
     vertical-align:middle;
 }
+
+.horizontal-submit {
+    margin-top: 25px;
+    background-color: limegreen;
+    color: white;
+}
