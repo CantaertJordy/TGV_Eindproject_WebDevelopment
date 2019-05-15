@@ -49,7 +49,7 @@ namespace TGV_Eindproject_WebDevelopment.Service
             RailwayStations paris = railwayStationService.Get("Parijs");
             RailwayStations moscow = railwayStationService.Get("Moskou");
             RailwayStations brussels = railwayStationService.Get("Brussel");
-            RailwayStations berlin = railwayStationService.Get("Berlin");
+            RailwayStations berlin = railwayStationService.Get("Berlijn");
 
             IList<Lines> route = new List<Lines>();
 

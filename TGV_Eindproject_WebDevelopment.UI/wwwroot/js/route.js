@@ -4,7 +4,7 @@
 
 const Failure = () => {
     $("#loading").hide();
-} 
+}
 
 $(() => {
     $("#dateOfDeparture").datepicker({

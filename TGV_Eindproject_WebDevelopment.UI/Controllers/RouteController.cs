@@ -34,10 +34,7 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
         public ActionResult Index(int? departureId, int? destinationId, DateTime? dateOfDeparture)
         {
             if (departureId == null || destinationId == null || dateOfDeparture == null || destinationId == departureId)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return PartialView("_FaultyInputPartial");
-            }
 
             IList<IList<Tgvs>> calculatedRoutes = tgvService.GetJourneys((int)departureId, (int)destinationId, (DateTime)dateOfDeparture);
             IList<IList<RouteVM>> routes = new List<IList<RouteVM>>();

@@ -15,9 +15,9 @@
       data-ajax="true"
       data-ajax-method="POST"
       data-ajax-mode="replace"
-      data-ajax-update="#content"
-      data-ajax-loading="#loading"
-      data-ajax-success="Success"
+      data-ajax-update="#routeContent"
+      data-ajax-loading="#calculateLoading"
+      data-ajax-succes="Succes"
       data-ajax-failure="Failure">
     <div class="row">
         <div class="col-md-3">
@@ -34,26 +34,26 @@
         </div>
         <div class="col-md-3">
             <label for="dateOfDeparture" class="control-label">Date of departure:</label>
-            <input id="dateOfDeparture" class="form-control" name="dateOfDeparture" autocomplete="off"/>
+            <input id="dateOfDeparture" class="form-control" name="dateOfDeparture" autocomplete="off" />
         </div>
         <div class="col-md-2">
-            <input class="form-control horizontal-submit horizontal-form" value="Calculate Route" type="submit"/>
+            <input class="form-control horizontal-submit horizontal-form" type="submit" value="Calculate Route" />
         </div>
         <div class="col-md-1">
-            <img src="~/images/loading.gif" class="horizontal-form" alt="loading" style="display: none; width: 80%"/>
+            <img id="calculateLoading" src="~/images/loading.gif" class="horizontal-form" alt="loading" style="display: none; width: 80%" />
         </div>
     </div>
 </form>
 
-<hr/>
+<hr />
 
-<div id="content">
+<div id="routeContent">
 
 </div>
 
 @section Scripts {
     <script src="~/lib/jqueryui/jquery-ui.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-ajax-unobtrusive-master/src/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/lib/jquery-ajax-unobtrusive-master/dist/jquery.unobtrusive-ajax.js"></script>
     <script src="~/js/route.js"></script>
 }
