@@ -36,9 +36,46 @@ body {
     }
 }
 
-#startScreenImg {
-    vertical-align:middle;
+/*#startScreenContent {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../images/railways.jpg');
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+}*/
+
+.jumbotron {
+    background: url('../images/railways.jpg') fixed center no-repeat;
+    background-size: cover;
+    position: relative;
+    width: auto;
+    height: 100vh;
 }
+
+
+    /*#startScreenImg {
+        min-height: 100%;
+        min-width: 1024px;
+         Set up proportionate scaling 
+        width: 100%;
+        height: auto;
+         Set up positioning 
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+@media screen and (max-width: 1024px) {  Specific to this particular image 
+    img.bg {
+        left: 50%;
+        margin-left: -512px; 50% 
+    }*/
+
+/*#startScreenImg{
+    width:1080px;
+}*/
+
 
 .horizontal-submit {
     margin-top: 25px;
