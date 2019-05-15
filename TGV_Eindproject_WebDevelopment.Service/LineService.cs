@@ -64,14 +64,14 @@ namespace TGV_Eindproject_WebDevelopment.Service
                 departureId = brussels.Id;
             }
 
-            if (destinationId == moscow.Id)
+            if (destinationId == moscow.Id && departureId != berlin.Id)
             {
                 route.Add(lineDAO.Get(departureId, berlin.Id));
                 route.Add(lineDAO.Get(berlin.Id, destinationId));
             }
             else if ((departureId == amsterdam.Id && destinationId == rome.Id) || (departureId == amsterdam.Id && destinationId == paris.Id)
                 || (departureId == rome.Id && destinationId == amsterdam.Id) || (departureId == paris.Id && destinationId == amsterdam.Id)
-                || destinationId == london.Id)
+                || (destinationId == london.Id && departureId != brussels.Id))
             {
                 route.Add(lineDAO.Get(departureId, brussels.Id));
                 route.Add(lineDAO.Get(brussels.Id, destinationId));
