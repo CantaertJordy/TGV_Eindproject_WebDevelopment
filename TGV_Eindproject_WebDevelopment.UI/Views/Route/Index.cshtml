@@ -10,7 +10,8 @@
 <h2>Your journey</h2>
 
 
-<form asp-action="Index"
+<form id="searchForm"
+      asp-action="Index"
       data-ajax="true"
       data-ajax-method="POST"
       data-ajax-mode="replace"
@@ -36,10 +37,10 @@
             <input id="dateOfDeparture" class="form-control" name="dateOfDeparture" autocomplete="off"/>
         </div>
         <div class="col-md-2">
-            <button class="form-control horizontal-submit horizontal-form" onclick="calculate">Calculate Route</button>
+            <input class="form-control horizontal-submit horizontal-form" value="Calculate Route" type="submit"/>
         </div>
         <div class="col-md-1">
-            <img src="~/images/loading.gif" class="horizontal-form" alt="loading" style="display: none"/>
+            <img src="~/images/loading.gif" class="horizontal-form" alt="loading" style="display: none; width: 80%"/>
         </div>
     </div>
 </form>
@@ -53,5 +54,6 @@
 @section Scripts {
     <script src="~/lib/jqueryui/jquery-ui.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-ajax-unobtrusive-master/src/jquery.unobtrusive-ajax.js"></script>
     <script src="~/js/route.js"></script>
 }

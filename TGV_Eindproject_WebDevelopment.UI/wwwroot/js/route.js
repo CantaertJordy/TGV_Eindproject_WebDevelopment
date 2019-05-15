@@ -6,10 +6,6 @@ const Failure = () => {
     $("#loading").hide();
 } 
 
-const calculate = () => {
-    $("form").trigger("submit");
-}
-
 $(() => {
     $("#dateOfDeparture").datepicker({
         numberOfMonths: 1,

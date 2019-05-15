@@ -40,7 +40,7 @@ namespace TGV_Eindproject_WebDevelopment.Repository
 
         public RailwayStations Get(string city)
         {
-            return _dbContext.RailwayStations.Where(station => station.City.Equals(city)).First();
+            return _dbContext.RailwayStations.Where(station => station.City.ToLower().Equals(city.ToLower())).First();
         }
 
         #endregion

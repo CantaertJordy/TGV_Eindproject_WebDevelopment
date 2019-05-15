@@ -35,12 +35,12 @@ namespace TGV_Eindproject_WebDevelopment.Repository
 
         public IEnumerable<Tgvs> GetWithLine(int lineId)
         {
-            return _dbContext.Tgvs.Where(tgv => tgv.Line == lineId).ToList();
+            return _dbContext.Tgvs.Where(tgv => tgv.Line == lineId).Include(tgv => tgv.LineNavigation).ToList();
         }
 
         public Tgvs Get(int id)
         {
-            return _dbContext.Tgvs.Where(tgv => tgv.Id == id).First();
+            return _dbContext.Tgvs.Where(tgv => tgv.Id == id).Include(tgv => tgv.LineNavigation).First();
         }
 
         #endregion

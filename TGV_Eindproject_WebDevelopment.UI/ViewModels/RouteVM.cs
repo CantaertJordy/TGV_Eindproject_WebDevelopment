@@ -13,5 +13,9 @@ namespace TGV_Eindproject_WebDevelopment.UI.ViewModels
         public DateTime TimeOfDeparture { get; set; }
         public DateTime TimeOfArrival { get; set; }
         public Tgvs Tgv { get; set; }
+        public double PriceEconomic { get; set; }
+        public double PriceBusiness { get; set; }
+        public int AvailableSeatsEconomic { get; set; }
+        public int AvailableSeatsBusiness { get; set; }
     }
 }
