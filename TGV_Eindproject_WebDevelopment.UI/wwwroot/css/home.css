@@ -1,0 +1,43 @@
+﻿body {
+    background: url('../images/railways.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+button {
+    display: inline-block;
+    box-sizing: border-box;
+    vertical-align: middle;
+    width: 150px !important;
+    height: 50px !important;
+    margin: 0 auto;
+    transition: transform .2s, background .2s !important;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)) !important;
+    background-color: transparent !important;
+    color: white !important;
+    margin-top: 250px;
+}
+
+    button:hover {
+        transform: scale(1.2);
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) !important;
+    }
+
+#homeContent {
+    vertical-align:central;
+}
+
+hr{
+    
+    
+    visibility:hidden
+}
+
+footer {
+    position: fixed;
+    bottom:0;
+}
+
+
+
