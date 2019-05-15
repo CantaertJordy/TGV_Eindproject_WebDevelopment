@@ -40,8 +40,20 @@ body {
     vertical-align:middle;
 }
 
-.horizontal-submit {
+.horizontal-form {
     margin-top: 25px;
+}
+
+.horizontal-submit {
     background-color: limegreen;
     color: white;
+}
+
+p.error {
+    color: red;
+    font-weight: bold;
+}
+
+.route {
+    border: 1px solid lightgray;
 }

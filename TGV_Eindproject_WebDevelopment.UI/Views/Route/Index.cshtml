@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Calculate journey";
 }
 
 @section Styles {
@@ -9,15 +9,16 @@
 
 <h2>Your journey</h2>
 
-<div class="row">
-    <form asp-action="CalculateRoute"
-          data-ajax="true"
-          data-ajax-method="POST"
-          data-ajax-mode="replace"
-          data-ajax-update="#content"
-          data-ajax-loading="#loading"
-          data-ajax-success="Success"
-          data-ajax-failure="Failure">
+
+<form asp-action="Index"
+      data-ajax="true"
+      data-ajax-method="POST"
+      data-ajax-mode="replace"
+      data-ajax-update="#content"
+      data-ajax-loading="#loading"
+      data-ajax-success="Success"
+      data-ajax-failure="Failure">
+    <div class="row">
         <div class="col-md-3">
             <label for="departureId" class="control-label">Departure:</label>
             <select id="departureId" name="departureId" asp-items="@ViewBag.stations" class="form-control">
@@ -34,15 +35,20 @@
             <label for="dateOfDeparture" class="control-label">Date of departure:</label>
             <input id="dateOfDeparture" class="form-control" name="dateOfDeparture" autocomplete="off"/>
         </div>
-        <div class="col-md-3">
-            <input class="form-control horizontal-submit" type="submit" value="Calculate route" />
+        <div class="col-md-2">
+            <button class="form-control horizontal-submit horizontal-form" onclick="calculate">Calculate Route</button>
         </div>
-    </form>
-</div>
+        <div class="col-md-1">
+            <img src="~/images/loading.gif" class="horizontal-form" alt="loading" style="display: none"/>
+        </div>
+    </div>
+</form>
 
 <hr/>
 
+<div id="content">
 
+</div>
 
 @section Scripts {
     <script src="~/lib/jqueryui/jquery-ui.min.js"></script>
