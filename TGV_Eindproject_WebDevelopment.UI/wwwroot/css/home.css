@@ -5,8 +5,8 @@
     background-repeat: no-repeat;
 }
 
-button {
-    display: inline-block;
+button.journey {
+    vertical-align: central !important;
     box-sizing: border-box;
     vertical-align: middle;
     width: 150px !important;
@@ -19,7 +19,7 @@ button {
     margin-top: 250px;
 }
 
-button:hover {
+button.journey:hover {
     transform: scale(1.2);
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) !important;
 }

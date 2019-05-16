@@ -2,26 +2,99 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TGV_Eindproject_WebDevelopment.Domain.Entities;
+using TGV_Eindproject_WebDevelopment.Service;
 using TGV_Eindproject_WebDevelopment.UI.Models;
 
 namespace TGV_Eindproject_WebDevelopment.UI.Controllers
 {
     public class HomeController : Controller
     {
+        private UserService userService;
+
+        public HomeController()
+        {
+            userService = new UserService();
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
+
+
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Welcome";
+
+            DateTime time = DateTime.Now;
+            string welcome = "Welcome";
+            String name = "";
+
+            if (time.Hour >= 5 && time.Hour <= 12)
+            {
+                welcome = "Good morning";
+            }
+            else if (time.Hour >= 13 && time.Hour <= 17)
+            {
+                welcome = "Good afternoon";
+            }
+            else if (time.Hour >= 18 && time.Hour <= 20)
+            {
+                welcome = "Good evening";
+            }
+            else if (time.Hour >= 21 && time.Hour <= 24)
+            {
+                welcome = "Good night";
+            }
+
+            name = getName();
+            if(name == null)
+            {
+                ViewData["Message"] = welcome + "!";
+            }
+            else
+            {
+                ViewData["Message"] = welcome + " " + name + "!";
+            }
 
             return View();
         }
+
+
+        public string getName()
+        {
+
+            try
+            {
+                String netUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                if (netUserId == null)
+                {
+                    return null;
+                }
+
+
+                Users u = userService.Get(netUserId);
+                if (u == null)
+                    return null;
+                else
+                    return u.FirstName;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            
+        }
+
+
+
 
         public IActionResult Contact()
         {

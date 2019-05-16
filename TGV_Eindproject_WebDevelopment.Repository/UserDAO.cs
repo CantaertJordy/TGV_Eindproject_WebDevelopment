@@ -37,6 +37,12 @@ namespace TGV_Eindproject_WebDevelopment.Repository
             return _dbContext.Users.Where(user => user.Id == id).FirstOrDefault();
         }
 
+        public Users Get(String netUserId)
+        {
+            Users u = _dbContext.Users.Where(user => user.NetUserId.Equals(netUserId)).FirstOrDefault();
+            return u;
+        }
+
         #endregion
 
         #region Update-Methods
