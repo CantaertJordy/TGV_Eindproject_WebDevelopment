@@ -23,13 +23,13 @@
         <div class="col-md-3">
             <label for="departureId" class="control-label">Departure:</label>
             <select id="departureId" name="departureId" asp-items="@ViewBag.stations" class="form-control">
-                <option>Please select a station...</option>
+                <option selected="selected" disabled="disabled">Please select a station...</option>
             </select>
         </div>
         <div class="col-md-3">
             <label for="destinationId" class="control-label">Destination:</label>
             <select id="destinationId" name="destinationId" asp-items="@ViewBag.stations" class="form-control">
-                <option>Please select a station...</option>
+                <option selected="selected" disabled="disabled">Please select a station...</option>
             </select>
         </div>
         <div class="col-md-3">
