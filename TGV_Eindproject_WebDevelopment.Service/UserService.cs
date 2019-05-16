@@ -30,6 +30,11 @@ namespace TGV_Eindproject_WebDevelopment.Service
             return userDAO.Get(id);
         }
 
+        public Users Get(String netUserId)
+        {
+            return userDAO.Get(netUserId);
+        }
+
         public void Create(Users entity)
         {
             userDAO.Create(entity);
