@@ -76,8 +76,9 @@ namespace TGV_Eindproject_WebDevelopment.Service
                 Tgvs tgv = GetJourney(l, dateOfDeparture);
                 tgv.LineNavigation = l;
                 journey.Add(tgv);
-
-                dateOfDeparture = dateOfDeparture.Add(tgv.TimeOfDeparture);
+                
+                //TODO: Nog een probleem bij overgang van dagen
+                dateOfDeparture = dateOfDeparture.Date.Add(tgv.TimeOfDeparture);
             }
 
             return journey;
