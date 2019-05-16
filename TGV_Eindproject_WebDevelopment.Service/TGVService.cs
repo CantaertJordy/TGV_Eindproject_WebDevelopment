@@ -14,12 +14,14 @@ namespace TGV_Eindproject_WebDevelopment.Service
         #region Repositories
 
         private readonly TGVDAO tgvDAO;
+        private readonly TicketDAO ticketDAO;
 
         #endregion
 
         #region Services
 
         private readonly LineService lineService;
+        private readonly HolidayPeriodService holidayPeriodService;
 
         #endregion
 
@@ -29,6 +31,8 @@ namespace TGV_Eindproject_WebDevelopment.Service
         {
             tgvDAO = new TGVDAO();
             lineService = new LineService();
+            ticketDAO = new TicketDAO();
+            holidayPeriodService = new HolidayPeriodService();
         }
 
         #endregion
@@ -49,15 +53,17 @@ namespace TGV_Eindproject_WebDevelopment.Service
 
             foreach (Tgvs tgv in tgvs)
             {
-                IList<Tgvs> route = GetJourney(departureId, destinationId, dateOfDeparture.TimeOfDay);
+                IList<Tgvs> route = GetJourney(departureId, destinationId, dateOfDeparture);
 
                 journeys.Add(route);
+
+                dateOfDeparture = dateOfDeparture.Add(route[0].TimeOfDeparture).AddSeconds(1);
             }
 
             return journeys;
         }
 
-        public IList<Tgvs> GetJourney(int departureId, int destinationId, TimeSpan timeOfDeparture)
+        public IList<Tgvs> GetJourney(int departureId, int destinationId, DateTime dateOfDeparture)
         {
             IList<Lines> route = lineService.GetRoute(departureId, destinationId);
 
@@ -67,27 +73,51 @@ namespace TGV_Eindproject_WebDevelopment.Service
 
             foreach (Lines l in route)
             {
-                Tgvs tgv = GetJourney(l, timeOfDeparture);
+                Tgvs tgv = GetJourney(l, dateOfDeparture);
                 tgv.LineNavigation = l;
                 journey.Add(tgv);
 
-                timeOfDeparture.Add(tgv.TimeOfDeparture);
-                if (timeOfDeparture.CompareTo(fullDay) >= 0)
-                    timeOfDeparture.Subtract(fullDay);
+                dateOfDeparture = dateOfDeparture.Add(tgv.TimeOfDeparture);
             }
 
             return journey;
         }
 
-        public Tgvs GetJourney(Lines line, TimeSpan timeOfDeparture)
+        public Tgvs GetJourney(Lines line, DateTime dateOfDeparture)
         {
             IEnumerable<Tgvs> tgvs = GetWithLine(line.Id);
-            Tgvs bestTgv = BestTgv(tgvs, timeOfDeparture);
+            Tgvs bestTgv = BestTgv(tgvs, dateOfDeparture.TimeOfDay);
 
             if (bestTgv == null)
                 return EarliestTgv(tgvs);
-            else
-                return bestTgv;
+
+            IEnumerable<HolidayPeriods> holidayPeriods = holidayPeriodService.All();
+
+            foreach (HolidayPeriods h in holidayPeriods)
+            {
+                if (h.StartDate.CompareTo(dateOfDeparture) <= 0 && h.EndDate.CompareTo(dateOfDeparture) >= 0)
+                {
+                    bestTgv.AvailableBusinessSeats = (int) (bestTgv.AvailableBusinessSeats * (1 + h.ExtraSeatsPercent));
+                    bestTgv.AvailableEconomicSeats = (int)(bestTgv.AvailableEconomicSeats * (1 + h.ExtraSeatsPercent));
+                    bestTgv.BasePriceBusiness *= 1 + h.ExtraPricePercent;
+                    bestTgv.BasePriceEconomic *= 1 + h.ExtraPricePercent;
+                }
+            }
+
+            IEnumerable<Tickets> tickets = ticketDAO.AllForTGV(bestTgv.Id, dateOfDeparture);
+
+            foreach (Tickets t in tickets)
+            {
+                if (t.IsCancelled == 0)
+                {
+                    if (t.IsBusiness == 0)
+                        bestTgv.AvailableBusinessSeats--;
+                    else
+                        bestTgv.AvailableEconomicSeats--;
+                }
+            }
+
+            return bestTgv;
         }
 
         public IEnumerable<Tgvs> GetWithLine(int lineId)
@@ -126,7 +156,7 @@ namespace TGV_Eindproject_WebDevelopment.Service
 
             foreach (Tgvs tgv in tgvs)
             {
-                if ((bestTgv == null && tgv.TimeOfDeparture.CompareTo(time) >= 0) || (bestTgv != null && tgv.TimeOfDeparture.CompareTo(bestTgv.TimeOfDeparture) > 0))
+                if ((bestTgv == null && tgv.TimeOfDeparture.CompareTo(time) >= 0) || (bestTgv != null && tgv.TimeOfDeparture.CompareTo(bestTgv.TimeOfDeparture) < 0))
                     bestTgv = tgv;
             }
 
