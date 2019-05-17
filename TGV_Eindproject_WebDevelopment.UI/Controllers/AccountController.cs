@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TGV_Eindproject_WebDevelopment.Domain.Entities;
 using TGV_Eindproject_WebDevelopment.Service;
@@ -19,16 +20,13 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             userService = new UserService();
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+        [Authorize]
         public IActionResult SetCredentials()
         {
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult SetCredentials([Bind("Name, FirstName, BirthDate, Country, City, Address")]Users entity)
         {
