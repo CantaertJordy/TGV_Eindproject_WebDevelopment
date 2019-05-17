@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace TGV_Eindproject_WebDevelopment.Domain.Entities
 {
+    [Serializable]
     public partial class Tgvs
     {
         public Tgvs()

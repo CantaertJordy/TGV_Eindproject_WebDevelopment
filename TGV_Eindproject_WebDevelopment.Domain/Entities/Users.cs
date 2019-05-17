@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TGV_Eindproject_WebDevelopment.Domain.Entities
 {
+    [Serializable]
     public partial class Users
     {
         public Users()
