@@ -47,8 +47,8 @@
             <div class="col-md-4">
                 <a class="form-control horizontal-submit btn"
                    asp-action="BuyTicket"
-                   asp-route-departureId="@route.First().Tgv.LineNavigation.Departure"
-                   asp-route-destinationId="@route.Last().Tgv.LineNavigation.Destination" 
+                   asp-route-departureId="@route.First().DepartureId"
+                   asp-route-destinationId="@route.Last().DestinationId" 
                    asp-route-dateOfDeparture="@route.First().TimeOfDeparture">
                     Buy tickets
                 </a>

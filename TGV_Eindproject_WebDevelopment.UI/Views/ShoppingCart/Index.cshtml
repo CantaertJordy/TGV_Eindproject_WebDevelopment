@@ -1,0 +1,106 @@
+﻿@model TGV_Eindproject_WebDevelopment.UI.ViewModels.ShoppingCartVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h4>Shopping cart:</h4>
+
+<h3>Review your shopping cart</h3>
+
+@if (Model == null)
+{
+    @Html.Raw("Your shopping cart is empty at the moment.")
+}
+else
+{
+    <form asp-action="Confirm">
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content[0].StartStation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content[0].TimeOfDeparture)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content[0].EndStation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content[0].TimeOfArrival)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content[0].AvailableSeatsBusiness)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content[0].AvailableSeatsEconomic)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content[0].PriceBusiness)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content[0].PriceEconomic)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content[0].Business)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content[0].Amount)
+                </th>
+                <th>
+                    Price
+                </th>
+            </tr>
+            @{
+                double total = 0;
+            }
+            @for (int i = 0; i < Model.Content.Count; i++)
+            {
+                <tr>
+                    @Html.HiddenFor(r => r.Content[i].DepartureId)
+                    @Html.HiddenFor(r => r.Content[i].DestinationId)
+                    @Html.HiddenFor(r => r.Content[i].TgvId)
+                    <td>
+                        <input asp-for="@Model.Content[i].StartStation" readonly="readonly" class="form-control" />
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Content[i].TimeOfDeparture" readonly="readonly" class="form-control" />
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Content[i].EndStation" readonly="readonly" class="form-control" />
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Content[i].TimeOfArrival" readonly="readonly" class="form-control" />
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Content[i].AvailableSeatsBusiness" readonly="readonly" class="form-control" />
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Content[i].AvailableSeatsEconomic" readonly="readonly" class="form-control" />
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Content[i].PriceBusiness" readonly="readonly" class="form-control" />
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Content[i].PriceEconomic" readonly="readonly" class="form-control" />
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Content[i].Business" type="checkbox" class="form-control" />
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Content[i].Amount" readonly="readonly" class="form-control" />
+                    </td>
+                    <td>
+                        <input value="@Model.Content[i].PriceEconomic" readonly="readonly" class="form-control" />
+                    </td>
+                    @{ 
+                        total += Model.Content[i].PriceEconomic;
+                    }
+                </tr>
+            }
+            <tr>
+
+            </tr>
+        </table>
+    </form>
+}

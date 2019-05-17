@@ -9,19 +9,10 @@ namespace TGV_Eindproject_WebDevelopment.UI.ViewModels
     {
         public ShoppingCartVM()
         {
-            Content = new List<CartItemVM>();
+            Content = new List<RouteVM>();
         }
 
-        public IList<CartItemVM> Content { get; set; }
-    }
-
-    public class CartItemVM
-    {
-        public CartItemVM()
-        {
-            Route = new List<RouteVM>();
-        }
-
-        public IList<RouteVM> Route { get; set; }
+        public IList<RouteVM> Content { get; set; }
+        public string UserName { get; set; }
     }
 }

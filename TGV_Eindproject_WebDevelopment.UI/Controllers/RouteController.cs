@@ -66,7 +66,9 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
                         AvailableSeatsEconomic = tgv.AvailableEconomicSeats,
                         PriceBusiness = tgv.BasePriceBusiness,
                         PriceEconomic = tgv.BasePriceEconomic,
-                        Tgv = tgv
+                        TgvId = tgv.Id,
+                        DepartureId = tgv.LineNavigation.Departure,
+                        DestinationId = tgv.LineNavigation.Destination
                     };
 
                     lastArrival = temp.Add(tgv.LineNavigation.Duration);
@@ -87,40 +89,40 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             DateTime date = Convert.ToDateTime(dateOfDeparture);
 
             IList<Tgvs> journey = tgvService.GetJourney(departureId, destinationId, date);
-            CartItemVM cartItem = new CartItemVM();
+            ShoppingCartVM shoppingCart = new ShoppingCartVM();
 
             foreach (Tgvs tgv in journey)
             {
                 if (tgv.TimeOfDeparture.CompareTo(date.TimeOfDay) < 0)
                     date = date.AddDays(1);
 
+                tgv.Tickets = null;
+                tgv.LineNavigation.Tgvs = null;
+                tgv.LineNavigation.DepartureNavigation = null;
+                tgv.LineNavigation.DestinationNavigation = null;
+
                 RouteVM route = new RouteVM()
                 {
                     StartStation = tgv.LineNavigation.DepartureNavigation.City,
                     EndStation = tgv.LineNavigation.DestinationNavigation.City,
                     TimeOfDeparture = date.Date.Add(tgv.TimeOfDeparture),
-                    Tgv = tgv,
+                    TgvId = tgv.Id,
                     PriceEconomic = tgv.BasePriceEconomic,
                     PriceBusiness = tgv.BasePriceBusiness,
                     AvailableSeatsBusiness = tgv.AvailableBusinessSeats,
-                    AvailableSeatsEconomic = tgv.AvailableEconomicSeats
+                    AvailableSeatsEconomic = tgv.AvailableEconomicSeats,
+                    DepartureId = tgv.LineNavigation.Departure,
+                    DestinationId = tgv.LineNavigation.Destination
                 };
 
                 route.TimeOfArrival = route.TimeOfDeparture.Add(tgv.LineNavigation.Duration);
 
                 date = route.TimeOfArrival;
 
-                cartItem.Route.Add(route);
+                shoppingCart.Content.Add(route);
             }
 
-            ShoppingCartVM shoppingCartVM = HttpContext.Session.GetObject<ShoppingCartVM>("ShoppingCart");
-
-            if (shoppingCartVM == null)
-                shoppingCartVM = new ShoppingCartVM();
-
-            shoppingCartVM.Content.Add(cartItem);
-
-            HttpContext.Session.SetObject("ShoppingCart", cartItem);
+            HttpContext.Session.SetObject("ShoppingCart", shoppingCart);
 
             return RedirectToAction("Index", "ShoppingCart");
         }
