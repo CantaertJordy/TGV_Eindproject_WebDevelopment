@@ -8,8 +8,9 @@ namespace TGV_Eindproject_WebDevelopment.UI.ViewModels
 {
     public class ShoppingCartVM
     {
-        public Users user;
-        public IList<string> names;
-        public IList<Tgvs> route;
+        public Users User;
+        public IList<string> Names;
+        public IList<Tgvs> Route;
+        public DateTime DateOfDeparture;
     }
 }
