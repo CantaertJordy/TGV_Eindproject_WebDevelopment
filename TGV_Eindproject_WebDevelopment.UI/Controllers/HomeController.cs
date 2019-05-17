@@ -69,7 +69,6 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
 
         public string getName()
         {
-
             try
             {
                 String netUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -89,12 +88,10 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             catch (Exception ex)
             {
                 return null;
-            }
-            
+            }         
         }
 
-
-
+        
 
         public IActionResult Contact()
         {
