@@ -46,18 +46,20 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
         [HttpGet]
         public IActionResult Users(int amount)
         {
-            string[] userNames = new string[amount];
-
+            IList<string> userNames = new List<string>();
             Users user = userService.Get(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            userNames[0] = user.Name + user.FirstName;
+            userNames.Add(user.Name + " " + user.FirstName);
+
+            for (int i = 1; i < amount; i++)
+                userNames.Add("Insert Name");
 
             return View(userNames);
         }
 
         [Authorize]
         [HttpPost]
-        public IActionResult Confirm(string[] users)
+        public IActionResult Confirm(IList<string> users)
         {
             throw new NotImplementedException();
         }
