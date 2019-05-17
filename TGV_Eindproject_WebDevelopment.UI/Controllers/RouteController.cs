@@ -82,6 +82,13 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
         public IActionResult BuyTicket(int departureId, int destinationId, string dateOfDeparture)
         {
             DateTime date = Convert.ToDateTime(dateOfDeparture);
+
+            ShoppingCartVM shoppingCart = new ShoppingCartVM()
+            {
+                Route = tgvService.GetJourney(departureId, destinationId, date),
+                DateOfDeparture = date
+            };
+
             throw new NotImplementedException();
         }
     }
