@@ -19,13 +19,12 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
     {
         private readonly TGVService tgvService;
         private readonly RailwayStationService railwayStationService;
-        private readonly LineService lineService;
+        private readonly UserService userService;
 
         public RouteController()
         {
             tgvService = new TGVService();
             railwayStationService = new RailwayStationService();
-            lineService = new LineService();
         }
 
         public IActionResult Index()
@@ -88,30 +87,31 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
         {
             DateTime date = Convert.ToDateTime(dateOfDeparture);
 
-            ShoppingCartVM shoppingCart = new ShoppingCartVM()
+            OrderDetailVM orderDetails = new OrderDetailVM()
             {
                 Route = tgvService.GetJourney(departureId, destinationId, date),
-                DateOfDeparture = date
+                DateOfDeparture = date,
             };
 
-            foreach (Tgvs tgv in shoppingCart.Route)
+            foreach (Tgvs tgv in orderDetails.Route)
             {
                 tgv.LineNavigation = null;
                 tgv.Tickets = null;
             }
 
-            HttpContext.Session.SetObject("ShoppingCart", shoppingCart);
+            //HttpContext.Session.SetObject("OrderDetails", orderDetails);
 
-            //if (User.FindFirst(ClaimTypes.NameIdentifier).Value)
-            //{
-            //    Console.Write("null");
-            //}
-            //else
-            //{
-            //    Console.Write("not null");
-            //}
+            if (userService.Get(User.FindFirst(ClaimTypes.NameIdentifier).Value) != null)
+                return RedirectToAction("OrderDetails", orderDetails);
+            else
+                return RedirectToAction("SetCredentials", "Account");
+        }
 
-            throw new NotImplementedException();
+        public IActionResult OrderDetails(OrderDetailVM orderDetails)
+        {
+            //OrderDetailVM orderDetails = HttpContext.Session.GetObject<OrderDetailVM>("OrderDetails");
+
+            return View(orderDetails);
         }
     }
 }

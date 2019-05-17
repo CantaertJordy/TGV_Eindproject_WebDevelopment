@@ -7,11 +7,9 @@ using TGV_Eindproject_WebDevelopment.Domain.Entities;
 namespace TGV_Eindproject_WebDevelopment.UI.ViewModels
 {
     [Serializable]
-    public class ShoppingCartVM
+    public class OrderDetailVM
     {
-        public Users User;
-        public IList<string> Names;
-        public IList<Tgvs> Route;
-        public DateTime DateOfDeparture;
+        public IList<Tgvs> Route { get; set; }
+        public DateTime DateOfDeparture { get; set; }
     }
 }

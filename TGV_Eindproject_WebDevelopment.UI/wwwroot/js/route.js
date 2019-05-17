@@ -41,4 +41,6 @@ $(() => {
             $("#searchForm").trigger("submit");
         }
     });
-})
+
+    
+});
