@@ -4,9 +4,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h4>Shopping cart:</h4>
+<h2>Shopping cart:</h2>
 
-<h3>Review your shopping cart</h3>
+<h4>Review your shopping cart</h4>
 
 @if (Model == null)
 {
@@ -15,92 +15,91 @@
 else
 {
     <form asp-action="Confirm">
-        <table>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Content[0].StartStation)
-                </th>
-                <th>
+            <div class="row">
+                <div class="col-md-2">
+                    Route
+                </div>
+                <div class="col-md-2">
                     @Html.DisplayNameFor(model => model.Content[0].TimeOfDeparture)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Content[0].EndStation)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Content[0].TimeOfArrival)
-                </th>
-                <th>
+                </div>
+                <div class="col-md-1">
                     @Html.DisplayNameFor(model => model.Content[0].AvailableSeatsBusiness)
-                </th>
-                <th>
+                </div>
+                <div class="col-md-1">
                     @Html.DisplayNameFor(model => model.Content[0].AvailableSeatsEconomic)
-                </th>
-                <th>
+                </div>
+                <div class="col-md-1">
                     @Html.DisplayNameFor(model => model.Content[0].PriceBusiness)
-                </th>
-                <th>
+                </div>
+                <div class="col-md-1">
                     @Html.DisplayNameFor(model => model.Content[0].PriceEconomic)
-                </th>
-                <th>
+                </div>
+                <div class="col-md-1">
                     @Html.DisplayNameFor(model => model.Content[0].Business)
-                </th>
-                <th>
+                </div>
+                <div class="col-md-1">
                     @Html.DisplayNameFor(model => model.Content[0].Amount)
-                </th>
-                <th>
-                    Price
-                </th>
-            </tr>
+                </div>
+                <div class="col-md-1">
+                    Total price
+                </div>
+            </div>
             @{
                 double total = 0;
             }
             @for (int i = 0; i < Model.Content.Count; i++)
             {
-                <tr>
-                    @Html.HiddenFor(r => r.Content[i].DepartureId)
-                    @Html.HiddenFor(r => r.Content[i].DestinationId)
-                    @Html.HiddenFor(r => r.Content[i].TgvId)
-                    <td>
-                        <input asp-for="@Model.Content[i].StartStation" readonly="readonly" class="form-control" />
-                    </td>
-                    <td>
-                        <input asp-for="@Model.Content[i].TimeOfDeparture" readonly="readonly" class="form-control" />
-                    </td>
-                    <td>
-                        <input asp-for="@Model.Content[i].EndStation" readonly="readonly" class="form-control" />
-                    </td>
-                    <td>
-                        <input asp-for="@Model.Content[i].TimeOfArrival" readonly="readonly" class="form-control" />
-                    </td>
-                    <td>
-                        <input asp-for="@Model.Content[i].AvailableSeatsBusiness" readonly="readonly" class="form-control" />
-                    </td>
-                    <td>
-                        <input asp-for="@Model.Content[i].AvailableSeatsEconomic" readonly="readonly" class="form-control" />
-                    </td>
-                    <td>
-                        <input asp-for="@Model.Content[i].PriceBusiness" readonly="readonly" class="form-control" />
-                    </td>
-                    <td>
-                        <input asp-for="@Model.Content[i].PriceEconomic" readonly="readonly" class="form-control" />
-                    </td>
-                    <td>
-                        <input asp-for="@Model.Content[i].Business" type="checkbox" class="form-control" />
-                    </td>
-                    <td>
-                        <input asp-for="@Model.Content[i].Amount" readonly="readonly" class="form-control" />
-                    </td>
-                    <td>
-                        <input value="@Model.Content[i].PriceEconomic" readonly="readonly" class="form-control" />
-                    </td>
-                    @{ 
-                        total += Model.Content[i].PriceEconomic;
-                    }
-                </tr>
+            <div class="row">
+                @Html.HiddenFor(r => r.Content[i].DepartureId)
+                @Html.HiddenFor(r => r.Content[i].DestinationId)
+                @Html.HiddenFor(r => r.Content[i].TgvId)
+                @Html.HiddenFor(r => r.Content[i].StartStation)
+                @Html.HiddenFor(r => r.Content[i].EndStation)
+                @Html.HiddenFor(r => r.Content[i].TimeOfArrival)
+                <div class="col-md-2">
+                    @Model.Content[i].StartStation &rarr; @Model.Content[i].EndStation
+                </div>
+                <div class="col-md-2">
+                    <input asp-for="@Model.Content[i].TimeOfDeparture" readonly="readonly" />
+                </div>
+                <div class="col-md-1">
+                    <input asp-for="@Model.Content[i].AvailableSeatsBusiness" type="number" readonly="readonly" />
+                </div>
+                <div class="col-md-1">
+                    <input asp-for="@Model.Content[i].AvailableSeatsEconomic" type="number" readonly="readonly" />
+                </div>
+                <div class="col-md-1">
+                    <input asp-for="@Model.Content[i].PriceBusiness" id="@("txtBusiness" + i)" type="number" readonly="readonly" />
+                </div>
+                <div class="col-md-1">
+                    <input asp-for="@Model.Content[i].PriceEconomic" id="@("txtEconomic" + i)" type="number" readonly="readonly" />
+                </div>
+                <div class="col-md-1">
+                    <input asp-for="@Model.Content[i].Business" class="checkboxes" />
+                </div>
+                <div class="col-md-1">
+                    <input asp-for="@Model.Content[i].Amount" type="number" readonly="readonly" class=" amount" />
+                </div>
+                <div class="col-md-1">
+                    <input id="@("txtSubtotal"+ i)" value="@Model.Content[i].PriceEconomic" type="number" readonly="readonly" class=" subtotal" />
+                </div>
+                @{
+                    total += Model.Content[i].PriceEconomic;
+                }
+            </div>
             }
-            <tr>
-
-            </tr>
-        </table>
+            <div class="row">
+                <div class="col-md-9"></div>
+                <div class="col-md-1">
+                    <input type="number" id="amount" min="1" max="10" value="1" />
+                </div>
+                <div class="col-md-1">
+                    <input id="totalPrice" type="number" readonly="readonly" value="@total"/>
+                </div>
+            </div>
     </form>
+}
+
+@section Scripts {
+    <script src="~/js/shopping-cart.js"></script>
 }

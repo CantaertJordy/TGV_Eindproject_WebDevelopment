@@ -30,6 +30,9 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             {
                 Users user = userService.Get(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
+                if (user == null)
+                    return RedirectToAction("SetCredentials", "Account");
+
                 shoppingCart.UserName = user.Name + user.FirstName;
             }
 

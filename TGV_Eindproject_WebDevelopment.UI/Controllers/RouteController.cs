@@ -96,11 +96,6 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
                 if (tgv.TimeOfDeparture.CompareTo(date.TimeOfDay) < 0)
                     date = date.AddDays(1);
 
-                tgv.Tickets = null;
-                tgv.LineNavigation.Tgvs = null;
-                tgv.LineNavigation.DepartureNavigation = null;
-                tgv.LineNavigation.DestinationNavigation = null;
-
                 RouteVM route = new RouteVM()
                 {
                     StartStation = tgv.LineNavigation.DepartureNavigation.City,
@@ -112,8 +107,14 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
                     AvailableSeatsBusiness = tgv.AvailableBusinessSeats,
                     AvailableSeatsEconomic = tgv.AvailableEconomicSeats,
                     DepartureId = tgv.LineNavigation.Departure,
-                    DestinationId = tgv.LineNavigation.Destination
+                    DestinationId = tgv.LineNavigation.Destination,
+                    Amount = 1
                 };
+
+                tgv.Tickets = null;
+                tgv.LineNavigation.Tgvs = null;
+                tgv.LineNavigation.DepartureNavigation = null;
+                tgv.LineNavigation.DestinationNavigation = null;
 
                 route.TimeOfArrival = route.TimeOfDeparture.Add(tgv.LineNavigation.Duration);
 
