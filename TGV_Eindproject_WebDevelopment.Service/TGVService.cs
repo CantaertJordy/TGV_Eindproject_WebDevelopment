@@ -57,7 +57,7 @@ namespace TGV_Eindproject_WebDevelopment.Service
 
                 journeys.Add(route);
 
-                dateOfDeparture = dateOfDeparture.Add(route[0].TimeOfDeparture).AddSeconds(1);
+                dateOfDeparture = dateOfDeparture.Date.Add(route[0].TimeOfDeparture).AddSeconds(1);
             }
 
             return journeys;
@@ -76,9 +76,8 @@ namespace TGV_Eindproject_WebDevelopment.Service
                 Tgvs tgv = GetJourney(l, dateOfDeparture);
                 tgv.LineNavigation = l;
                 journey.Add(tgv);
-                
-                //TODO: Nog een probleem bij overgang van dagen
-                dateOfDeparture = dateOfDeparture.Date.Add(tgv.TimeOfDeparture);
+
+                dateOfDeparture = dateOfDeparture.Date.Add(tgv.TimeOfDeparture.Add(tgv.LineNavigation.Duration));
             }
 
             return journey;
@@ -145,7 +144,10 @@ namespace TGV_Eindproject_WebDevelopment.Service
             foreach (Tgvs t in tgvs)
             {
                 if (earliestTime.CompareTo(t.TimeOfDeparture) > 0)
+                {
                     earliestTgv = t;
+                    earliestTime = t.TimeOfDeparture;
+                }
             }
 
             return earliestTgv;
