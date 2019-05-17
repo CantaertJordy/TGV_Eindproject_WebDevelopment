@@ -81,37 +81,48 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
 
             return PartialView("_JourneyResultPartial", routes);
         }
-
-        [Authorize]
+        
         public IActionResult BuyTicket(int departureId, int destinationId, string dateOfDeparture)
         {
             DateTime date = Convert.ToDateTime(dateOfDeparture);
 
-            OrderDetailVM orderDetails = new OrderDetailVM()
-            {
-                Route = tgvService.GetJourney(departureId, destinationId, date),
-                DateOfDeparture = date,
-            };
+            IList<Tgvs> journey = tgvService.GetJourney(departureId, destinationId, date);
+            CartItemVM cartItem = new CartItemVM();
 
-            foreach (Tgvs tgv in orderDetails.Route)
+            foreach (Tgvs tgv in journey)
             {
-                tgv.LineNavigation = null;
-                tgv.Tickets = null;
+                if (tgv.TimeOfDeparture.CompareTo(date.TimeOfDay) < 0)
+                    date = date.AddDays(1);
+
+                RouteVM route = new RouteVM()
+                {
+                    StartStation = tgv.LineNavigation.DepartureNavigation.City,
+                    EndStation = tgv.LineNavigation.DestinationNavigation.City,
+                    TimeOfDeparture = date.Date.Add(tgv.TimeOfDeparture),
+                    Tgv = tgv,
+                    PriceEconomic = tgv.BasePriceEconomic,
+                    PriceBusiness = tgv.BasePriceBusiness,
+                    AvailableSeatsBusiness = tgv.AvailableBusinessSeats,
+                    AvailableSeatsEconomic = tgv.AvailableEconomicSeats
+                };
+
+                route.TimeOfArrival = route.TimeOfDeparture.Add(tgv.LineNavigation.Duration);
+
+                date = route.TimeOfArrival;
+
+                cartItem.Route.Add(route);
             }
 
-            //HttpContext.Session.SetObject("OrderDetails", orderDetails);
+            ShoppingCartVM shoppingCartVM = HttpContext.Session.GetObject<ShoppingCartVM>("ShoppingCart");
 
-            if (userService.Get(User.FindFirst(ClaimTypes.NameIdentifier).Value) != null)
-                return RedirectToAction("OrderDetails", orderDetails);
-            else
-                return RedirectToAction("SetCredentials", "Account");
-        }
+            if (shoppingCartVM == null)
+                shoppingCartVM = new ShoppingCartVM();
 
-        public IActionResult OrderDetails(OrderDetailVM orderDetails)
-        {
-            //OrderDetailVM orderDetails = HttpContext.Session.GetObject<OrderDetailVM>("OrderDetails");
+            shoppingCartVM.Content.Add(cartItem);
 
-            return View(orderDetails);
+            HttpContext.Session.SetObject("ShoppingCart", cartItem);
+
+            return RedirectToAction("Index", "ShoppingCart");
         }
     }
 }
