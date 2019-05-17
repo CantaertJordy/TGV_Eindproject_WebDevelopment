@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TGV_Eindproject_WebDevelopment.Domain.Entities;
 using TGV_Eindproject_WebDevelopment.Service;
+using TGV_Eindproject_WebDevelopment.UI.Extensions;
 using TGV_Eindproject_WebDevelopment.UI.ViewModels;
 
 namespace TGV_Eindproject_WebDevelopment.UI.Controllers
@@ -79,6 +83,7 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             return PartialView("_JourneyResultPartial", routes);
         }
 
+        [Authorize]
         public IActionResult BuyTicket(int departureId, int destinationId, string dateOfDeparture)
         {
             DateTime date = Convert.ToDateTime(dateOfDeparture);
@@ -88,6 +93,23 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
                 Route = tgvService.GetJourney(departureId, destinationId, date),
                 DateOfDeparture = date
             };
+
+            foreach (Tgvs tgv in shoppingCart.Route)
+            {
+                tgv.LineNavigation = null;
+                tgv.Tickets = null;
+            }
+
+            HttpContext.Session.SetObject("ShoppingCart", shoppingCart);
+
+            //if (User.FindFirst(ClaimTypes.NameIdentifier).Value)
+            //{
+            //    Console.Write("null");
+            //}
+            //else
+            //{
+            //    Console.Write("not null");
+            //}
 
             throw new NotImplementedException();
         }
