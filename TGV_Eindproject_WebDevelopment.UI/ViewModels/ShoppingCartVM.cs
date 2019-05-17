@@ -6,6 +6,7 @@ using TGV_Eindproject_WebDevelopment.Domain.Entities;
 
 namespace TGV_Eindproject_WebDevelopment.UI.ViewModels
 {
+    [Serializable]
     public class ShoppingCartVM
     {
         public Users User;
