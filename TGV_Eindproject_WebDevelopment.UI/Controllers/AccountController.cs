@@ -50,5 +50,19 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
 
             return View(); ////////////////////////////////////////
         }
+
+
+
+
+
+
+
+        //trashcan
+        public IActionResult Testpage()
+        {
+            return View();
+        }
+
     }
+
 }

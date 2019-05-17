@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using TGV_Eindproject_WebDevelopment.Domain.Entities;
 using TGV_Eindproject_WebDevelopment.Service;
 using TGV_Eindproject_WebDevelopment.UI.Extensions;
+using TGV_Eindproject_WebDevelopment.UI.Services;
 using TGV_Eindproject_WebDevelopment.UI.ViewModels;
 
 namespace TGV_Eindproject_WebDevelopment.UI.Controllers
@@ -60,6 +61,59 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
         public IActionResult Confirm(string[] users)
         {
             throw new NotImplementedException();
+        }
+
+        [Authorize]
+        public async Task<ActionResult> PlaceOrder(IList<Tickets> tickets) 
+        {
+            try
+            {
+                var body = "<h3>Thank you for your order placed on " + DateTime.Now.ToString("dd/MM/yyyy") + "</h3>";
+                body += "<h4>You can find a summary of your order below</h4>";
+
+                foreach(Tickets t in tickets)
+                {
+                    string type;
+                    if(t.IsBusiness == 1)
+                    {
+                        type = "Business seat";
+                    }
+                    else
+                    {
+                        type = "Economic seat";
+                    }
+
+                    body += "<hr/>";
+                    body += "<div class='row'>" +
+                        "<div class='col-md-4>" +
+                        "<p>Time of departure: " + t.DateOfDeparture + "<br/>" +
+                        "Time of arrival: " + t.DateOfDeparture + t.Tgv.LineNavigation.Duration + "</p>" +
+                        "</div></div>" +
+                        "<div class='row'>" +
+                        "<div class='col-md-4>" +
+                        "<p>" + t.Tgv.LineNavigation.Departure + " &rarr; " + t.Tgv.LineNavigation.Destination +
+                        "</div></div>" +
+                        "<div class='row'>" +
+                        "<div class='col-md-4>" +
+                        "<p>Type:" + type + "</p>" +
+                        "</div></div>";
+                }
+
+                EmailSender mail = new EmailSender();
+                await mail.SendEmailAsync(
+                    User.Identity.Name, //testing
+                    "Order" + DateTime.Now.ToString("dd/MM/yyyy"), 
+                    body);
+                /////////////////////////////////////////
+                
+            }
+            catch(Exception ex)
+            {
+                //////////////////////////////////////////
+            }
+
+
+            return View();
         }
     }
 }
