@@ -78,5 +78,11 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
 
             return PartialView("_JourneyResultPartial", routes);
         }
+
+        public IActionResult BuyTicket(int departureId, int destinationId, string dateOfDeparture)
+        {
+            DateTime date = Convert.ToDateTime(dateOfDeparture);
+            throw new NotImplementedException();
+        }
     }
 }

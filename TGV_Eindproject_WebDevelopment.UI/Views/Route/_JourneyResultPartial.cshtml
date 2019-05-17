@@ -2,7 +2,6 @@
 
 @foreach (IList<RouteVM> route in Model)
 {
-<form>
     <div class="route">
         @{
             double businessSum = 0;
@@ -38,14 +37,22 @@
         }
         <div class="row">
             <div class="col-md-8">
-                <p>Total price business: € @businessSum</p>
-                <p>Total price economic: € @economicSum</p>
+                <div class="row">
+                    <p>Total price business: € @businessSum</p>
+                </div>
+                <div class="row">
+                    <p>Total price economic: € @economicSum</p>
+                </div>
             </div>
             <div class="col-md-4">
-                <button class="form-control horizontal-submit">Buy business</button>
-                <button class="form-control horizontal-submit">Buy economic</button>
+                <a class="form-control horizontal-submit"
+                   asp-action="BuyTicket"
+                   asp-route-departureId="@route.First().Tgv.LineNavigation.Departure"
+                   asp-route-destinationId="@route.Last().Tgv.LineNavigation.Destination" 
+                   asp-route-dateOfDeparture="@route.First().TimeOfDeparture">
+                    Buy tickets
+                </a>
             </div>
         </div>
     </div>
-</form>
 }
