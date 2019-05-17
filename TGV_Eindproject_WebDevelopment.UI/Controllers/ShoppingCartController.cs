@@ -22,21 +22,44 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
         }
 
         [Authorize]
+        [HttpGet]
         public IActionResult Index()
         {
             ShoppingCartVM shoppingCart = HttpContext.Session.GetObject<ShoppingCartVM>("ShoppingCart");
 
-            if (shoppingCart != null)
-            {
-                Users user = userService.Get(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-                if (user == null)
-                    return RedirectToAction("SetCredentials", "Account");
-
-                shoppingCart.UserName = user.Name + user.FirstName;
-            }
-
             return View(shoppingCart);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Index(ShoppingCartVM shoppingCartVM)
+        {
+            HttpContext.Session.SetObject("ShoppingCart", shoppingCartVM);
+
+            if (userService.Get(User.FindFirst(ClaimTypes.NameIdentifier).Value) == null)
+                return RedirectToAction("SetCredentials", "Account");
+
+            return RedirectToAction("Users", shoppingCartVM.Content[0].Amount);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult Users(int amount)
+        {
+            string[] userNames = new string[amount];
+
+            Users user = userService.Get(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            userNames[0] = user.Name + user.FirstName;
+
+            return View(userNames);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Confirm(string[] users)
+        {
+            throw new NotImplementedException();
         }
     }
 }

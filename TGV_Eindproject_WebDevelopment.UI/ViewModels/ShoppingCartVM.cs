@@ -13,6 +13,5 @@ namespace TGV_Eindproject_WebDevelopment.UI.ViewModels
         }
 
         public IList<RouteVM> Content { get; set; }
-        public string UserName { get; set; }
     }
 }

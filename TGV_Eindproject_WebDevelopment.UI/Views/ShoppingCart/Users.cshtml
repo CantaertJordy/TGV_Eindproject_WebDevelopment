@@ -1,0 +1,13 @@
+﻿@model string[]
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h2>Users</h2>
+
+<h4>Which user will use these tickets?</h4>
+
+<form asp-action="Confirm" method="post">
+    <input readonly="readonly" />
+</form>
