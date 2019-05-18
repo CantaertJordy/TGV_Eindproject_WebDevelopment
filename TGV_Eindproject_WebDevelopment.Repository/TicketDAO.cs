@@ -40,7 +40,7 @@ namespace TGV_Eindproject_WebDevelopment.Repository
 
         public Tickets Get(int id)
         {
-            return _dbContext.Tickets.Where(t => t.Id == id).Include(t => t.Tgv).Include(t => t.Tgv.LineNavigation).First();
+            return _dbContext.Tickets.Where(t => t.Id == id).Include(t => t.Tgv).Include(t => t.Tgv.LineNavigation).Include(t => t.Tgv.LineNavigation.DepartureNavigation).Include(t => t.Tgv.LineNavigation.DestinationNavigation).First();
         }
 
         public IEnumerable<Tickets> AllForTGV(int tgvId, DateTime dateOfDeparture)
