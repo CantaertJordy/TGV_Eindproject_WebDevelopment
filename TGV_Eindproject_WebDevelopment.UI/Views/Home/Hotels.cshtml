@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Hotels>
+
+@{
+    ViewData["Title"] = "Hotels";
+}
+
+<h2>Hotels</h2>
+
+@foreach (Hotels h in Model)
+{
+    <h3>@h.Name</h3>
+    <div class="row">
+        <div class="col-md-2">
+            <p>Price: @h.Prijs</p>
+            <a href="@h.Website">Site</a>
+        </div>
+        <div class="col-md-2">
+            <p>@h.City - @h.Country</p>
+            <p>@h.Address</p>
+        </div>
+    </div>
+    <hr />
+}

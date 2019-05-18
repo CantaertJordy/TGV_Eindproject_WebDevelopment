@@ -5,6 +5,10 @@
 
 <h2>Thank you for your purchase!</h2>
 
+<a asp-controller="Home" asp-action="Hotels" asp-route-destination="@Model.Last().Tgv.LineNavigation.DestinationNavigation.City" class="btn form-control horizontal-submit">
+    Click here for some suggestions for a place to stay.
+</a>
+
 <h3>Thank you for your order placed on @DateTime.Now.ToString("dd/MM/yyyy")</h3>
 <h4>You can find a summary of your order below</h4>
 

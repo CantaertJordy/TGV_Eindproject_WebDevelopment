@@ -15,10 +15,12 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
     public class HomeController : Controller
     {
         private UserService userService;
+        private HotelsService hotelsService;
 
         public HomeController()
         {
             userService = new UserService();
+            hotelsService = new HotelsService();
         }
 
         public IActionResult Index()
@@ -109,6 +111,11 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Hotels(string destination)
+        {
+            return View(hotelsService.Get(destination));
         }
     }
 }
