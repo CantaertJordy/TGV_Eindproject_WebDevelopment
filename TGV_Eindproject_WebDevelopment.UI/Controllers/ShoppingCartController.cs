@@ -154,9 +154,6 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             {
                 return RedirectToAction("ErrorWhileSendingMail");
             }
-
-
-            return View();  ///////////
         }
 
         [Route("/CustomErrorPages/ErrorWhileSendingMail")]
