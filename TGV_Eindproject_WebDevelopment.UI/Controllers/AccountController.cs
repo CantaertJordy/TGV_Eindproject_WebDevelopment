@@ -8,16 +8,19 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TGV_Eindproject_WebDevelopment.Domain.Entities;
 using TGV_Eindproject_WebDevelopment.Service;
+using Microsoft.AspNetCore.Identity;
 
 namespace TGV_Eindproject_WebDevelopment.UI.Controllers
 {
     public class AccountController : Controller
     {
         private readonly UserService userService;
+        private readonly TicketService ticketService;
 
         public AccountController()
         {
             userService = new UserService();
+            ticketService = new TicketService();
         }
 
         [Authorize]
@@ -51,16 +54,21 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             return RedirectToAction("PlaceOrder", "SchoppingCart");
         }
 
-
-
-
-
-
-
-        //trashcan
-        public IActionResult Testpage()
+        [Authorize]
+        public IActionResult History()
         {
-            return View();
+            String netUserID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            Users u = userService.Get(netUserID);
+
+            IEnumerable<Tickets> history = ticketService.AllFromUser(u.Id);
+
+            return View(history);
+        }
+
+        [Authorize]
+        public IActionResult CancelTicket(Tickets t)
+        {
+            return View(t);
         }
 
     }

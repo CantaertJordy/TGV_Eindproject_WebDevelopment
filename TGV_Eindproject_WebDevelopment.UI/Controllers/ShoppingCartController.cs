@@ -150,7 +150,7 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
                 EmailSender mail = new EmailSender();
                 await mail.SendEmailAsync(
                     User.Identity.Name,
-                    "Order" + DateTime.Now.ToString("dd/MM/yyyy"), 
+                    "Order placed on " + DateTime.Now.ToString("dd/MM/yyyy"), 
                     body);
 
                 return View(tickets);
@@ -160,9 +160,6 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             {
                 return RedirectToAction("ErrorWhileSendingMail");
             }
-
-
-            return View();  ///////////
         }
 
         [Route("/CustomErrorPages/ErrorWhileSendingMail")]

@@ -28,7 +28,7 @@ namespace TGV_Eindproject_WebDevelopment.UI.Services
                 {
                     smtp.Port = 587;
                     smtp.EnableSsl = true;
-                    smtp.Credentials = new NetworkCredential("vivestest69@gmail.com", "Azerty-123");
+                    smtp.Credentials = new NetworkCredential("order.tgnv@gmail.com", "Azerty-123");
                     await smtp.SendMailAsync(mail);
                 }
             }
