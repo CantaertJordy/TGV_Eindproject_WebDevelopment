@@ -5,12 +5,18 @@
 }
 
 <h2>Are you sure that you want to cancel this ticket?</h2>
-<!--
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>@Model.Name</h3>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-4">
         <p>
-            Time of departure: @Model.DateOfDeparture<br />
-            Time of arrival: @(Model.DateOfDeparture + Model.Tgv.LineNavigation.Duration)
+            Time of departure: @Model.DateOfDeparture.Add(Model.Tgv.TimeOfDeparture)<br />
+            Time of arrival: @(Model.DateOfDeparture.Add(Model.Tgv.TimeOfDeparture).Add(Model.Tgv.LineNavigation.Duration))
         </p>
     </div>
 </div>
@@ -18,7 +24,7 @@
 <div class="row">
     <div class="col-md-4">
         <p>
-            @Model.Tgv.LineNavigation.Departure &rarr; @Model.Tgv.LineNavigation.Destination
+            @Model.Tgv.LineNavigation.DepartureNavigation.City &rarr; @Model.Tgv.LineNavigation.DestinationNavigation.City
         </p>
     </div>
 </div>
@@ -34,10 +40,16 @@
             }
             else
             {
-                <span>Economiv seat</span>
+                <span>Economic seat</span>
             }
+            <br />
+            Seat: @Model.SeatNumber
             <br />
             Price: @Model.Price
         </p>
     </div>
-</div>-->
+</div>
+
+<div class="row">
+
+</div>
