@@ -321,6 +321,8 @@ namespace TGV_Eindproject_WebDevelopment.Domain.Entities
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Price).HasColumnName("price");
+
                 entity.Property(e => e.Tgvid).HasColumnName("TGVId");
 
                 entity.Property(e => e.UserId).HasColumnName("userId");

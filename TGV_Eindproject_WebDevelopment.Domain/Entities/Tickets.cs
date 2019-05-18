@@ -13,6 +13,7 @@ namespace TGV_Eindproject_WebDevelopment.Domain.Entities
         public byte IsBusiness { get; set; }
         public string SeatNumber { get; set; }
         public byte IsCancelled { get; set; }
+        public double Price { get; set; }
 
         public Tgvs Tgv { get; set; }
         public Users User { get; set; }
