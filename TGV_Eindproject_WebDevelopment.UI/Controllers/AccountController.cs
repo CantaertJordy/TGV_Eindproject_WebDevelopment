@@ -65,6 +65,12 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             return View(history);
         }
 
+        [Authorize]
+        public IActionResult CancelTicket(Tickets t)
+        {
+            return View(t);
+        }
+
     }
 
 }
