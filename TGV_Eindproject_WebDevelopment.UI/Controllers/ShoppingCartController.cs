@@ -63,6 +63,12 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
         [HttpPost]
         public IActionResult Confirm(IList<string> users)
         {
+            foreach (string s in users)
+            {
+                if (s == null)
+                    return RedirectToAction("Users", new { @amount = users.Count });
+            }
+
             ShoppingCartVM shoppingCart = HttpContext.Session.GetObject<ShoppingCartVM>("ShoppingCart");
             Users user = userService.Get(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 

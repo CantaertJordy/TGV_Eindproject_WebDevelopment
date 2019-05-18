@@ -37,6 +37,10 @@ namespace TGV_Eindproject_WebDevelopment.Service
 
         public void Create(Users entity)
         {
+            if (All().Count() > 0)
+                entity.Id = All().Last().Id + 1;
+            else
+                entity.Id = 1;
             userDAO.Create(entity);
         }
     }

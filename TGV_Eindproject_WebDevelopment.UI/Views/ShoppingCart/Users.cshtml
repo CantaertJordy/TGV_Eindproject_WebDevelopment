@@ -8,11 +8,16 @@
 
 <h4>Which user will use these tickets?</h4>
 
-<form asp-action="Confirm" method="post">
-    <input readonly="readonly" asp-for="@Model[0]" class="form-control" />
+<form id="userForm" asp-action="Confirm" method="post">
+    <input id="txtName0" readonly="readonly" asp-for="@Model[0]" class="form-control" />
     @for (int i = 1; i < Model.Count; i++)
     {
-        <input asp-for="@Model[i]" class="form-control" />
+        <input id="@("txtName" + i)" asp-for="@Model[i]" class="form-control" />
     }
-    <input type="submit" value="Confirm" class="horizontal-submit form-control"/>
+    <input id="submit" type="submit" value="Confirm" class="horizontal-submit form-control"/>
+    <p class="error" id="error"></p>
 </form>
+
+@section Scripts {
+    <script src="~/js/users.js"></script>
+}
