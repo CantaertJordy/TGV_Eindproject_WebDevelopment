@@ -18,11 +18,13 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
     {
         private UserService userService;
         private TicketService ticketService;
+        private RailwayStationService railwayStationService;
 
         public ShoppingCartController()
         {
             userService = new UserService();
             ticketService = new TicketService();
+            railwayStationService = new RailwayStationService();
         }
 
         [HttpGet]
@@ -127,21 +129,27 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
                     body += "<hr/>";
                     body += 
                         "<div class='row'>" +
-                            "<div class='col-md-4>" +
-                                "<p>Time of departure: " + t.DateOfDeparture + "<br/>" +
-                                "Time of arrival: " + t.DateOfDeparture + t.Tgv.LineNavigation.Duration + "</p>" +
+                            "<div class='col-md-4'>" +
+                                "<h5>" + t.Name + "</h5>" +
+                            "</div>" +
+                        "</div>" +
+                        "<div class='row'>" +
+                            "<div class='col-md-4'>" +
+                                "<p>Time of departure: " + t.DateOfDeparture.Add(t.Tgv.TimeOfDeparture) + "<br/>" +
+                                "Time of arrival: " + t.DateOfDeparture.Add(t.Tgv.TimeOfDeparture).Add(t.Tgv.LineNavigation.Duration) + "</p>" +
                             "</div>" +
                         "</div>" +
                         
                         "<div class='row'>" +
                             "<div class='col-md-4'>" +
-                                "<p>" + t.Tgv.LineNavigation.Departure + " &rarr; " + t.Tgv.LineNavigation.Destination + "</p>" +
+                                "<p>" + railwayStationService.Get(t.Tgv.LineNavigation.Departure).City + " &rarr; " + railwayStationService.Get(t.Tgv.LineNavigation.Destination).City + "</p>" +
                             "</div>" +
                         "</div>" +
                         
                         "<div class='row'>" +
                             "<div class='col-md-4'>" +
-                                "<p>Type:" + type + "<br/>" +
+                                "<p>Type: " + type + "<br/>" +
+                                "Seat: " + t.SeatNumber + "<br/>" +
                                 "Price: " + t.Price + "</p>" +
                             "</div>" +
                         "</div>";
