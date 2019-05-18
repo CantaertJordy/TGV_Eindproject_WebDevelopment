@@ -10,6 +10,7 @@
 
         @foreach (RouteVM r in route)
         {
+
             <div class="row">
                 <div class="col-md-4">
                     <p>Time of departure: @r.TimeOfDeparture</p>
@@ -37,12 +38,12 @@
         }
         <div class="row">
             <div class="col-md-8">
-                <div class="row">
+                
                     <p>Total price business: € @businessSum</p>
-                </div>
-                <div class="row">
+                
+                
                     <p>Total price economic: € @economicSum</p>
-                </div>
+                
             </div>
             <div class="col-md-4">
                 <a class="form-control horizontal-submit btn"

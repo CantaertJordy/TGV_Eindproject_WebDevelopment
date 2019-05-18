@@ -49,8 +49,11 @@
         </p>
     </div>
 </div>
-
-<form>
-    <a class="form-control horizontal-submit btn" asp-action="CancelTicketConfirm" asp-route-id="@Model.Id">Cancel this ticket</a>
-    <a class="form-control horizontal-submit btn" asp-action="History">Go back</a>
-</form>
+<div class="row">
+    <div class="col-md-2">
+        <a class="form-control horizontal-submit btn" asp-action="CancelTicketConfirm" asp-route-id="@Model.Id">Cancel this ticket</a>
+    </div>
+    <div class="col-md-2">
+        <a class="form-control horizontal-submit btn" style="background-color:red;" asp-action="History">Go back</a>
+    </div>
+</div>

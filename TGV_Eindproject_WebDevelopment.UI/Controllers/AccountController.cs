@@ -40,19 +40,20 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
                 {
                     entity.NetUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                     userService.Create(entity);
-                    //return RedirectToAction("");      ///////////////////////////////////////////////
                 }
             }
             catch (DataException e)
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again.");
+                return View(entity);
             }
             catch (Exception e)
             {
                 ModelState.AddModelError("", "Something went wrong, please try again.");
+                return View(entity);
             }
 
-            return RedirectToAction("PlaceOrder", "SchoppingCart");
+            return RedirectToAction("ToUsers", "ShoppingCart");
         }
 
         [Authorize]
