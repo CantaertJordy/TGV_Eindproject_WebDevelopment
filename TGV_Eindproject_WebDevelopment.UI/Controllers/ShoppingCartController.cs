@@ -119,35 +119,49 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
                     }
 
                     body += "<hr/>";
-                    body += "<div class='row'>" +
-                        "<div class='col-md-4>" +
-                        "<p>Time of departure: " + t.DateOfDeparture + "<br/>" +
-                        "Time of arrival: " + t.DateOfDeparture + t.Tgv.LineNavigation.Duration + "</p>" +
-                        "</div></div>" +
+                    body += 
                         "<div class='row'>" +
-                        "<div class='col-md-4>" +
-                        "<p>" + t.Tgv.LineNavigation.Departure + " &rarr; " + t.Tgv.LineNavigation.Destination +
-                        "</div></div>" +
+                            "<div class='col-md-4>" +
+                                "<p>Time of departure: " + t.DateOfDeparture + "<br/>" +
+                                "Time of arrival: " + t.DateOfDeparture + t.Tgv.LineNavigation.Duration + "</p>" +
+                            "</div>" +
+                        "</div>" +
+                        
                         "<div class='row'>" +
-                        "<div class='col-md-4>" +
-                        "<p>Type:" + type + "</p>" +
-                        "</div></div>";
+                            "<div class='col-md-4'>" +
+                                "<p>" + t.Tgv.LineNavigation.Departure + " &rarr; " + t.Tgv.LineNavigation.Destination + "</p>" +
+                            "</div>" +
+                        "</div>" +
+                        
+                        "<div class='row'>" +
+                            "<div class='col-md-4'>" +
+                                "<p>Type:" + type + "<br/>" +
+                                "Price: " + t.Price + "</p>" +
+                            "</div>" +
+                        "</div>";
                 }
 
                 EmailSender mail = new EmailSender();
                 await mail.SendEmailAsync(
-                    User.Identity.Name, //testing
+                    User.Identity.Name,
                     "Order" + DateTime.Now.ToString("dd/MM/yyyy"), 
                     body);
-                /////////////////////////////////////////
+
+                return View(tickets);
                 
             }
             catch(Exception ex)
             {
-                //////////////////////////////////////////
+                return RedirectToAction("ErrorWhileSendingMail");
             }
 
 
+            return View();  ///////////
+        }
+
+        [Route("/CustomErrorPages/ErrorWhileSendingMail")]
+        public IActionResult ErrorWhileSengingMail()
+        {
             return View();
         }
     }

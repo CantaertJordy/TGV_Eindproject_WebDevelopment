@@ -1,4 +1,4 @@
-﻿@model IList<IList<RouteVM>>
+﻿
 
 @foreach (IList<RouteVM> route in Model)
 {
@@ -50,7 +50,7 @@
                    asp-route-departureId="@route.First().DepartureId"
                    asp-route-destinationId="@route.Last().DestinationId" 
                    asp-route-dateOfDeparture="@route.First().TimeOfDeparture">
-                    Buy tickets
+                   Buy tickets
                 </a>
             </div>
         </div>

@@ -1,0 +1,48 @@
+﻿@model IList<Tickets>
+@{
+    ViewData["Title"] = "PlaceOrder";
+}
+
+<h2>Thank you for your purchase!</h2>
+
+<h3>>Thank you for your order placed on @DateTime.Now.ToString("dd/MM/yyyy")</h3>
+<h4>You can find a summary of your order below</h4>
+
+@foreach (Tickets t in Model)
+{
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <p>
+                Time of departure: @t.DateOfDeparture<br />
+                Time of arrival: @(t.DateOfDeparture + t.Tgv.LineNavigation.Duration)
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <p>
+                @t.Tgv.LineNavigation.Departure &rarr; @t.Tgv.LineNavigation.Destination
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <p>Type: 
+            
+            @if (t.IsBusiness == 1)
+            {
+                <span>Bussines seat</span>
+            }
+            else
+            {
+                <span>Economiv seat</span>
+            }
+            <br/>
+            Price: @t.Price 
+            </p>   
+        </div>   
+    </div>
+}

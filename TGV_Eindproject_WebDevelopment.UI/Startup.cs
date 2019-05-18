@@ -53,7 +53,7 @@ namespace TGV_Eindproject_WebDevelopment.UI
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseStatusCodePagesWithRedirects("/CustomErrorPages/{0}");
                 app.UseDatabaseErrorPage();
             }
             else

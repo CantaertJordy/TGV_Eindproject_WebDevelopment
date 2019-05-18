@@ -48,7 +48,7 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
                 ModelState.AddModelError("", "Something went wrong, please try again.");
             }
 
-            return View(); ////////////////////////////////////////
+            return RedirectToAction("PlaceOrder", "SchoppingCart");
         }
 
 
