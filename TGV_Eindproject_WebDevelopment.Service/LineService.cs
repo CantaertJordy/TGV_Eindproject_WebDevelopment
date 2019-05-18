@@ -43,38 +43,38 @@ namespace TGV_Eindproject_WebDevelopment.Service
                 throw new ArgumentException("The departure and destination cannot be the same.");
             }
 
-            RailwayStations london = railwayStationService.Get("Londen");
-            RailwayStations amsterdam = railwayStationService.Get("Amsterdam");
-            RailwayStations rome = railwayStationService.Get("Rome");
-            RailwayStations paris = railwayStationService.Get("Parijs");
-            RailwayStations moscow = railwayStationService.Get("Moskou");
-            RailwayStations brussels = railwayStationService.Get("Brussel");
-            RailwayStations berlin = railwayStationService.Get("Berlijn");
+            int brussels = 1;
+            int london = 2;
+            int paris = 3;
+            int amsterdam = 4;
+            int berlin = 5;
+            int rome = 6;
+            int moscow = 7;
 
             IList<Lines> route = new List<Lines>();
 
-            if (departureId == london.Id && destinationId != brussels.Id)
+            if (departureId == london && destinationId != brussels)
             {
-                route.Add(lineDAO.Get(departureId, brussels.Id));
-                departureId = brussels.Id;
+                route.Add(lineDAO.Get(departureId, brussels));
+                departureId = brussels;
             }
-            else if (departureId == moscow.Id && destinationId != berlin.Id)
+            else if (departureId == moscow && destinationId != berlin)
             {
-                route.Add(lineDAO.Get(departureId, berlin.Id));
-                departureId = brussels.Id;
+                route.Add(lineDAO.Get(departureId, berlin));
+                departureId = brussels;
             }
 
-            if (destinationId == moscow.Id && departureId != berlin.Id)
+            if (destinationId == moscow && departureId != berlin)
             {
-                route.Add(lineDAO.Get(departureId, berlin.Id));
-                route.Add(lineDAO.Get(berlin.Id, destinationId));
+                route.Add(lineDAO.Get(departureId, berlin));
+                route.Add(lineDAO.Get(berlin, destinationId));
             }
-            else if ((departureId == amsterdam.Id && destinationId == rome.Id) || (departureId == amsterdam.Id && destinationId == paris.Id)
-                || (departureId == rome.Id && destinationId == amsterdam.Id) || (departureId == paris.Id && destinationId == amsterdam.Id)
-                || (destinationId == london.Id && departureId != brussels.Id))
+            else if ((departureId == amsterdam && destinationId == rome) || (departureId == amsterdam && destinationId == paris)
+                || (departureId == rome && destinationId == amsterdam) || (departureId == paris && destinationId == amsterdam)
+                || (destinationId == london && departureId != brussels))
             {
-                route.Add(lineDAO.Get(departureId, brussels.Id));
-                route.Add(lineDAO.Get(brussels.Id, destinationId));
+                route.Add(lineDAO.Get(departureId, brussels));
+                route.Add(lineDAO.Get(brussels, destinationId));
             }
             else
             {

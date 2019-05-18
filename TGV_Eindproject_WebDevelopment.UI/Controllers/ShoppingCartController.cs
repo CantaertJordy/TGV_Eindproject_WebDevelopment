@@ -25,7 +25,6 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             ticketService = new TicketService();
         }
 
-        [Authorize]
         [HttpGet]
         public IActionResult Index()
         {

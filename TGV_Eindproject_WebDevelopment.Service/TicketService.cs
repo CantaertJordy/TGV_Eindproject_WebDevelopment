@@ -82,25 +82,12 @@ namespace TGV_Eindproject_WebDevelopment.Service
 
         public void Create(Tickets ticket)
         {
-            // replace with call from UserService
-            if (userService.Get(ticket.UserId) == null)
-                throw new ArgumentException("This user does not exist.");
-            if (tgvService.Get(ticket.Tgvid) == null)
-                throw new ArgumentException("This TGV does not exist.");
-            if (ticket.Name == null)
-                throw new ArgumentException("No name given.");
-            if (ticket.DateOfDeparture == null)
-                throw new ArgumentException("No date given.");
-            if (ticket.DateOfDeparture.CompareTo(DateTime.Now) < 0)
-                throw new ArgumentException("You cannot create a ticket for a moment before now.");
-            if (ticket.IsBusiness != 0 && ticket.IsBusiness != 1)
-                throw new ArgumentException("Invalid value for business or economic class.");
-
             SetSeatNumber(ticket);
             ticket.IsCancelled = 0;
             if (All().Count() > 0)
                 ticket.Id = All().Last().Id + 1;
-
+            else
+                ticket.Id = 1;
             ticketDAO.Create(ticket);
         }
 
