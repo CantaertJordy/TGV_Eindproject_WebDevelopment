@@ -17,10 +17,12 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
     public class ShoppingCartController : Controller
     {
         private UserService userService;
+        private TicketService ticketService;
 
         public ShoppingCartController()
         {
             userService = new UserService();
+            ticketService = new TicketService();
         }
 
         [Authorize]
@@ -41,11 +43,10 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             if (userService.Get(User.FindFirst(ClaimTypes.NameIdentifier).Value) == null)
                 return RedirectToAction("SetCredentials", "Account");
 
-            return RedirectToAction("Users", shoppingCartVM.Content[0].Amount);
+            return RedirectToAction("Users", new { @amount = shoppingCartVM.Content[0].Amount });
         }
 
         [Authorize]
-        [HttpGet]
         public IActionResult Users(int amount)
         {
             IList<string> userNames = new List<string>();
@@ -54,16 +55,42 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             userNames.Add(user.Name + " " + user.FirstName);
 
             for (int i = 1; i < amount; i++)
-                userNames.Add("Insert Name");
+                userNames.Add("");
 
-            return View(userNames);
+            return View("Users", userNames);
         }
 
         [Authorize]
         [HttpPost]
         public IActionResult Confirm(IList<string> users)
         {
-            throw new NotImplementedException();
+            ShoppingCartVM shoppingCart = HttpContext.Session.GetObject<ShoppingCartVM>("ShoppingCart");
+            Users user = userService.Get(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            foreach (RouteVM route in shoppingCart.Content)
+            {
+                foreach (string u in users)
+                {
+                    Tickets ticket = new Tickets()
+                    {
+                        UserId = user.Id,
+                        Tgvid = route.TgvId,
+                        Name = u,
+                        DateOfDeparture = route.TimeOfDeparture,
+                        IsBusiness = route.Business ? (byte)1 : (byte)0,
+                        Price = route.Business ? route.PriceBusiness : route.PriceEconomic
+                    };
+
+                    ticketService.Create(ticket);
+                }
+            }
+
+            IList<Tickets> tickets = new List<Tickets>(ticketService.AllFromUser(user.Id));
+
+            for (int i = 0; i < tickets.Count - shoppingCart.Content[0].Amount; i++)
+                tickets.RemoveAt(i);
+
+            return RedirectToAction("PlaceOrder", new { @tickets = tickets });
         }
 
         [Authorize]

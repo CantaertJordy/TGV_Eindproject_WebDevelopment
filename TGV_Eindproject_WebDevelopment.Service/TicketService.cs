@@ -20,6 +20,7 @@ namespace TGV_Eindproject_WebDevelopment.Service
         #region Services
 
         private readonly TGVService tgvService;
+        private readonly UserService userService;
         
         #endregion
 
@@ -29,6 +30,7 @@ namespace TGV_Eindproject_WebDevelopment.Service
         {
             ticketDAO = new TicketDAO();
             tgvService = new TGVService();
+            userService = new UserService();
         }
 
         #endregion
@@ -81,7 +83,7 @@ namespace TGV_Eindproject_WebDevelopment.Service
         public void Create(Tickets ticket)
         {
             // replace with call from UserService
-            if (GetUser(ticket.UserId) == null)
+            if (userService.Get(ticket.UserId) == null)
                 throw new ArgumentException("This user does not exist.");
             if (tgvService.Get(ticket.Tgvid) == null)
                 throw new ArgumentException("This TGV does not exist.");
@@ -96,6 +98,8 @@ namespace TGV_Eindproject_WebDevelopment.Service
 
             SetSeatNumber(ticket);
             ticket.IsCancelled = 0;
+            if (All().Count() > 0)
+                ticket.Id = All().Last().Id + 1;
 
             ticketDAO.Create(ticket);
         }
@@ -121,15 +125,6 @@ namespace TGV_Eindproject_WebDevelopment.Service
                 ticket.SeatNumber = "E-" + tickets.Count().ToString();
             else
                 ticket.SeatNumber = "B-" + tickets.Count().ToString();
-        }
-
-        #endregion
-
-        #region temporaries
-
-        private Users GetUser(int id)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
