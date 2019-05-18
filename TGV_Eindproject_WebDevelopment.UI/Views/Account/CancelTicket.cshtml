@@ -45,11 +45,12 @@
             <br />
             Seat: @Model.SeatNumber
             <br />
-            Price: @Model.Price
+            Price: @Model.Price Euro
         </p>
     </div>
 </div>
 
-<div class="row">
-
-</div>
+<form>
+    <a class="form-control horizontal-submit btn" asp-action="CancelTicketConfirm" asp-route-id="@Model.Id">Cancel this ticket</a>
+    <a class="form-control horizontal-submit btn" asp-action="History">Go back</a>
+</form>
