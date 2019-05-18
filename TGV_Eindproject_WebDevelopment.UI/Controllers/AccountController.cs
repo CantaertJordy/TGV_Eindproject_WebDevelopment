@@ -63,6 +63,11 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
 
             IEnumerable<Tickets> history = ticketService.AllFromUser(u.Id);
 
+            foreach(Tickets t in history)
+            {
+                t.DateOfDeparture = t.DateOfDeparture.Add(t.Tgv.TimeOfDeparture);
+            }
+
             return View(history);
         }
 
