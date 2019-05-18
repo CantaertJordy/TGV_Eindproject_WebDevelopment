@@ -109,7 +109,10 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
 
             try
             {
-                var body = "<h3>Thank you for your order placed on " + DateTime.Now.ToString("dd/MM/yyyy") + "</h3>";
+                String netUserID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                Users u = userService.Get(netUserID);
+
+                var body = "<h3>Hi " + u.FirstName + ", thank you for your order placed on " + DateTime.Now.ToString("dd/MM/yyyy") + "</h3>";
                 body += "<h4>You can find a summary of your order below</h4>";
 
                 foreach(Tickets t in tickets)

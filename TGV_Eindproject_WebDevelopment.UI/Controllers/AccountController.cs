@@ -66,10 +66,20 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
         }
 
         [Authorize]
-        public IActionResult CancelTicket(int t)
+        [HttpPost]
+
+        public IActionResult History(int t)
         {
-            Tickets ticket = ticketService.Get(t);
-            return View(t);
+
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]     
+        public IActionResult CancelTicket(int Id)
+        {
+            Tickets ticket = ticketService.Get(Id);
+            return View(ticket);
         }
 
     }
