@@ -21,9 +21,6 @@
                 @Html.DisplayNameFor(model => model.SeatNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsCancelled)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
@@ -37,7 +34,22 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+    string color;
+    if (item.IsCancelled == 1)
+    {
+        color = "lightcoral";
+    }
+    else if (DateTime.Compare(item.DateOfDeparture, DateTime.Now) < 0)
+    {
+        color = "lightgray";
+    }
+    else
+    {
+        color = "white";
+    }
+
+
+        <tr style="background-color: @color">
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -58,9 +70,6 @@
                 @Html.DisplayFor(modelItem => item.SeatNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsCancelled)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
@@ -69,9 +78,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.User.Address)
             </td>
-            <td>
-                <a asp-action="CancelTicket" asp-route-Id="@item.Id">Cancel this order?</a>
-            </td>
+            @if (item.IsCancelled == 1 || DateTime.Compare(item.DateOfDeparture, DateTime.Now) < 0)
+            {
+                <td>
+                    N/A
+                </td>
+            }
+            else
+            {
+                <td>
+                    <a asp-action="CancelTicket" asp-route-Id="@item.Id">Cancel this order?</a>
+                </td>
+            }
         </tr>
 }
     </tbody>
