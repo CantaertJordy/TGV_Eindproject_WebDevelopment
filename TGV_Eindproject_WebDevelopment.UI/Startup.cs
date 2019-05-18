@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using TGV_Eindproject_WebDevelopment.UI.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using TGV_Eindproject_WebDevelopment.UI.Services;
 
 namespace TGV_Eindproject_WebDevelopment.UI
 {
@@ -42,6 +44,19 @@ namespace TGV_Eindproject_WebDevelopment.UI
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            //services.AddDefaultIdentity<IdentityUser>(config =>     //Setup voor account email confirm & password recovery
+            //{
+            //    config.SignIn.RequireConfirmedEmail = true;
+            //}).AddEntityFrameworkStores<ApplicationDbContext>();
+            /*.AddDefaultUI(UIFramework.Bootstrap4)*/
+
+
+            // requires
+            //using Microsoft.AspNetCore.Identity.UI.Services;
+
+            //services.AddTransient<IEmailSender, EmailSender>();
+           
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 

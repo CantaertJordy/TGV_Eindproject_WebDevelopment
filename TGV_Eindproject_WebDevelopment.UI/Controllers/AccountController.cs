@@ -80,12 +80,14 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
         [Authorize]
         public async Task<ActionResult> CancelTicketConfirm(int id)
         {
-            try
-            {
+            Tickets t = ticketService.Get(id);
+            //if (ticket.DateOfDeparture.Date.AddDays(-3).CompareTo(DateTime.Now.Date) < 0)
+                
+
+                try
+                {
                 ticketService.Cancel(id);
-
-                Tickets t = ticketService.Get(id);
-
+                
                 String netUserID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 Users u = userService.Get(netUserID);
 

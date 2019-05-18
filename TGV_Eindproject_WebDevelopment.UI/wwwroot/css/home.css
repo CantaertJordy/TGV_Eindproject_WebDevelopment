@@ -1,5 +1,6 @@
 ﻿body {
-    background: url('../images/railways.jpg');
+    /*background: black;*/
+    background:url('../images/railways.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
