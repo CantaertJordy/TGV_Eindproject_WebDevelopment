@@ -10,7 +10,7 @@ namespace TGV_Eindproject_WebDevelopment.Domain.Entities
         public int UserId { get; set; }
         public int Tgvid { get; set; }
         public string Name { get; set; }
-        [Display(Name="Date of departure")]
+        [Display(Name="Date & time of departure")]
         public DateTime DateOfDeparture { get; set; }
         [Display(Name ="Type")]
         public byte IsBusiness { get; set; }

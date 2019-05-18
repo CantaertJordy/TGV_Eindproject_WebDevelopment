@@ -61,7 +61,9 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
             String netUserID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             Users u = userService.Get(netUserID);
 
-            IEnumerable<Tickets> history = ticketService.AllFromUser(u.Id);
+            IEnumerable<Tickets> history = new List<Tickets>();
+            if (u != null)
+                history = ticketService.AllFromUser(u.Id);
 
             return View(history);
         }
