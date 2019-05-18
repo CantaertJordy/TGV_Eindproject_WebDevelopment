@@ -99,6 +99,8 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
                 }
             }
 
+            HttpContext.Session.SetObject("ShoppingCart", null);
+
             return RedirectToAction("PlaceOrder", new { @amount = total });
         }
 
