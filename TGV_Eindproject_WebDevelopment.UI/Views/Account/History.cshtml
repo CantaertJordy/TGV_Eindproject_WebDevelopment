@@ -23,12 +23,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tgv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -47,7 +41,6 @@
     {
         color = "white";
     }
-
 
         <tr style="background-color: @color">
             <td>
@@ -72,16 +65,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tgv.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Address)
-            </td>
             @if (item.IsCancelled == 1 || DateTime.Compare(item.DateOfDeparture, DateTime.Now) < 0)
             {
                 <td>
                     N/A
+                </td>
+            }
+            else if (item.DateOfDeparture.Date.AddDays(-3).CompareTo(DateTime.Now.Date) < 0)
+            {
+                <td>
+                    To late to cancel
                 </td>
             }
             else
