@@ -78,6 +78,7 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
 
             ShoppingCartVM shoppingCart = HttpContext.Session.GetObject<ShoppingCartVM>("ShoppingCart");
             Users user = userService.Get(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            int total = 0;
 
             foreach (RouteVM route in shoppingCart.Content)
             {
@@ -94,20 +95,18 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
                     };
 
                     ticketService.Create(ticket);
+                    total++;
                 }
             }
 
-            IList<Tickets> tickets = new List<Tickets>(ticketService.AllFromUser(user.Id));
-
-            for (int i = 0; i < tickets.Count - shoppingCart.Content[0].Amount; i++)
-                tickets.RemoveAt(i);
-
-            return RedirectToAction("PlaceOrder", new { @tickets = tickets });
+            return RedirectToAction("PlaceOrder", new { @amount = total });
         }
 
         [Authorize]
-        public async Task<ActionResult> PlaceOrder(IList<Tickets> tickets) 
+        public async Task<ActionResult> PlaceOrder(int amount) 
         {
+            IList<Tickets> tickets = ticketService.All().Reverse().Take(amount).Reverse().ToList();
+
             try
             {
                 var body = "<h3>Thank you for your order placed on " + DateTime.Now.ToString("dd/MM/yyyy") + "</h3>";
