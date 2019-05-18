@@ -61,7 +61,7 @@ namespace TGV_Eindproject_WebDevelopment.Service
             else if (departureId == moscow && destinationId != berlin)
             {
                 route.Add(lineDAO.Get(departureId, berlin));
-                departureId = brussels;
+                departureId = berlin;
             }
 
             if (destinationId == moscow && departureId != berlin)

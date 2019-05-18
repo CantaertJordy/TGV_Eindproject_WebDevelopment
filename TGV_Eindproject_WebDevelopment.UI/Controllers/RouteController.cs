@@ -19,7 +19,6 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
     {
         private readonly TGVService tgvService;
         private readonly RailwayStationService railwayStationService;
-        private readonly UserService userService;
 
         public RouteController()
         {

@@ -35,7 +35,7 @@ namespace TGV_Eindproject_WebDevelopment.Repository
 
         public IEnumerable<Tickets> AllFromUser(int userId)
         {
-            return _dbContext.Tickets.Where(t => t.UserId == userId).Include(t => t.Tgv.LineNavigation).ToList();
+            return _dbContext.Tickets.Where(t => t.UserId == userId).Include(t => t.Tgv).Include(t => t.Tgv.LineNavigation).Include(t => t.Tgv.LineNavigation.DepartureNavigation).Include(t => t.Tgv.LineNavigation.DestinationNavigation).ToList();
         }
 
         public Tickets Get(int id)
@@ -45,7 +45,7 @@ namespace TGV_Eindproject_WebDevelopment.Repository
 
         public IEnumerable<Tickets> AllForTGV(int tgvId, DateTime dateOfDeparture)
         {
-            return _dbContext.Tickets.Where(t => t.Tgvid == tgvId && t.DateOfDeparture.Date.Equals(dateOfDeparture.Date)).ToList();
+            return _dbContext.Tickets.Where(t => t.Tgvid == tgvId && t.DateOfDeparture.Date.Equals(dateOfDeparture.Date)).Include(t => t.Tgv).Include(t => t.Tgv.LineNavigation).Include(t => t.Tgv.LineNavigation.DepartureNavigation).Include(t => t.Tgv.LineNavigation.DestinationNavigation).ToList();
         }
 
         #endregion
