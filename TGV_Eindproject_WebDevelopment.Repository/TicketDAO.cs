@@ -30,7 +30,7 @@ namespace TGV_Eindproject_WebDevelopment.Repository
 
         public IEnumerable<Tickets> All()
         {
-            return _dbContext.Tickets.Include(t => t.Tgv).Include(t => t.Tgv.LineNavigation).ToList();
+            return _dbContext.Tickets.Include(t => t.Tgv).Include(t => t.Tgv.LineNavigation).Include(t => t.Tgv.LineNavigation.DepartureNavigation).Include(t => t.Tgv.LineNavigation.DestinationNavigation).ToList();
         }
 
         public IEnumerable<Tickets> AllFromUser(int userId)

@@ -18,13 +18,11 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
     {
         private UserService userService;
         private TicketService ticketService;
-        private RailwayStationService railwayStationService;
 
         public ShoppingCartController()
         {
             userService = new UserService();
             ticketService = new TicketService();
-            railwayStationService = new RailwayStationService();
         }
 
         [HttpGet]
@@ -142,7 +140,7 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
                         
                         "<div class='row'>" +
                             "<div class='col-md-4'>" +
-                                "<p>" + railwayStationService.Get(t.Tgv.LineNavigation.Departure).City + " &rarr; " + railwayStationService.Get(t.Tgv.LineNavigation.Destination).City + "</p>" +
+                                "<p>" + t.Tgv.LineNavigation.DepartureNavigation.City + " &rarr; " + t.Tgv.LineNavigation.DestinationNavigation.City + "</p>" +
                             "</div>" +
                         "</div>" +
                         

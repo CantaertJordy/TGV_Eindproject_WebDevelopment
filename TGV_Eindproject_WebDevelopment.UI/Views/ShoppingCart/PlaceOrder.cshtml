@@ -5,7 +5,7 @@
 
 <h2>Thank you for your purchase!</h2>
 
-<h3>>Thank you for your order placed on @DateTime.Now.ToString("dd/MM/yyyy")</h3>
+<h3>Thank you for your order placed on @DateTime.Now.ToString("dd/MM/yyyy")</h3>
 <h4>You can find a summary of your order below</h4>
 
 @foreach (Tickets t in Model)
@@ -13,9 +13,14 @@
     <hr />
     <div class="row">
         <div class="col-md-4">
+            <h5> + @t.Name + </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
             <p>
-                Time of departure: @t.DateOfDeparture<br />
-                Time of arrival: @(t.DateOfDeparture + t.Tgv.LineNavigation.Duration)
+                Time of departure: @t.DateOfDeparture.Add(t.Tgv.TimeOfDeparture)<br />
+                Time of arrival: @t.DateOfDeparture.Add(t.Tgv.TimeOfDeparture).Add(t.Tgv.LineNavigation.Duration)
             </p>
         </div>
     </div>
@@ -23,7 +28,7 @@
     <div class="row">
         <div class="col-md-4">
             <p>
-                @t.Tgv.LineNavigation.Departure &rarr; @t.Tgv.LineNavigation.Destination
+                @t.Tgv.LineNavigation.DepartureNavigation.City &rarr; @t.Tgv.LineNavigation.DestinationNavigation.City
             </p>
         </div>
     </div>
@@ -38,8 +43,10 @@
             }
             else
             {
-                <span>Economiv seat</span>
+                <span>Economic seat</span>
             }
+            <br/>
+            Seat: @t.SeatNumber
             <br/>
             Price: @t.Price 
             </p>   
