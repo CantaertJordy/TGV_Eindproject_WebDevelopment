@@ -34,10 +34,17 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public IActionResult Index(ShoppingCartVM shoppingCartVM)
         {
             HttpContext.Session.SetObject("ShoppingCart", shoppingCartVM);
+
+            return RedirectToAction("ToUsers");
+        }
+
+        [Authorize]
+        public IActionResult ToUsers()
+        {
+            ShoppingCartVM shoppingCartVM = HttpContext.Session.GetObject<ShoppingCartVM>("ShoppingCart");
 
             if (userService.Get(User.FindFirst(ClaimTypes.NameIdentifier).Value) == null)
                 return RedirectToAction("SetCredentials", "Account");
