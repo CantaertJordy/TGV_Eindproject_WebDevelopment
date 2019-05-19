@@ -86,7 +86,7 @@ namespace TGV_Eindproject_WebDevelopment.UI.Controllers
         public IActionResult BuyTicket(int departureId, int destinationId, string dateOfDeparture)
         {
             DateTime date = Convert.ToDateTime(dateOfDeparture);
-
+            
             IList<Tgvs> journey = tgvService.GetJourney(departureId, destinationId, date);
             ShoppingCartVM shoppingCart = new ShoppingCartVM();
 

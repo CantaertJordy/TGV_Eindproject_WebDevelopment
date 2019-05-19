@@ -36,7 +36,7 @@ namespace TGV_Eindproject_WebDevelopment.Domain.Entities
             if (!optionsBuilder.IsConfigured)
             {
                 //optionsBuilder.UseSqlServer("Server=.\\SQL_VIVES; Database=TGVs;Trusted_Connection=True;");
-                optionsBuilder.UseSqlServer(" Data Source = tgnv.database.windows.net; Initial Catalog = tgnv; User ID = jouw usernaam; Password = azerty-123");
+                optionsBuilder.UseSqlServer("Data Source=tgnv.database.windows.net;Initial Catalog=TGVs;User ID=tgnv;Password=azerty-123");
             }
         }
 
