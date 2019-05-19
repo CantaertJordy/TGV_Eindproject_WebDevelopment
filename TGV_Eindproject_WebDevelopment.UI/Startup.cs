@@ -38,7 +38,11 @@ namespace TGV_Eindproject_WebDevelopment.UI
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.Name = "Vives.be.train.Session";
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.IdleTimeout = TimeSpan.FromSeconds(60);
+                options.Cookie.IsEssential = true;
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
